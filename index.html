@@ -36,9 +36,11 @@ body {
     width: 100%;
     padding: 24px 14px;
     overflow: hidden;
+
+    /* Background photo on every page */
     background:
-        radial-gradient(circle at top, #64214f, transparent 55%),
-        linear-gradient(145deg, #170719, #3b123a, #170719);
+        linear-gradient(rgba(20, 4, 25, .52), rgba(20, 4, 25, .62)),
+        url("background.jpg") center center / cover no-repeat;
 }
 
 .page.active {
@@ -50,8 +52,15 @@ body {
 }
 
 @keyframes pageIn {
-    from { opacity: 0; transform: scale(.97); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 h1 {
@@ -105,9 +114,8 @@ input {
 
 #page1 {
     background:
-        linear-gradient(#16061c55, #16061c99),
-        url("background.jpg") center/cover no-repeat,
-        linear-gradient(135deg, #4a1649, #18071b);
+        linear-gradient(rgba(22, 6, 28, .35), rgba(22, 6, 28, .55)),
+        url("background.jpg") center center / cover no-repeat;
 }
 
 .opening-text {
@@ -126,6 +134,7 @@ input {
         transform: scale(1);
         text-shadow: 0 0 10px #ff4caa;
     }
+
     to {
         transform: scale(1.04);
         text-shadow: 0 0 28px #ff4caa;
@@ -165,7 +174,9 @@ input {
 }
 
 @keyframes heartbeat {
-    to { transform: scale(1.4); }
+    to {
+        transform: scale(1.4);
+    }
 }
 
 .broken-heart {
@@ -173,35 +184,68 @@ input {
 }
 
 @keyframes breakHeart {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.8) rotate(-15deg); }
-    100% { transform: scale(0); opacity: 0; }
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.8) rotate(-15deg);
+    }
+
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
 }
 
 /* PAGE 3: BIRTHDAY CAKE */
 
+#page3 {
+    justify-content: center;
+    align-items: center;
+}
+
 .celebration-frame {
     width: min(520px, 96%);
+    min-height: 390px;
     border: 3px solid var(--gold);
     border-radius: 28px;
     padding: 20px 10px;
-    background: #270d2dc9;
+    background: rgba(39, 13, 45, .55);
     box-shadow: 0 0 30px #ff6cae66;
     position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
     overflow: hidden;
+    isolation: isolate;
 }
 
 .cake {
     width: 190px;
     height: 155px;
-    margin: 40px auto 25px;
+    margin: 15px auto;
     position: relative;
+    flex-shrink: 0;
     cursor: pointer;
+    z-index: 3;
     animation: cakeFloat 2s infinite alternate;
+    transition: opacity .5s ease, transform .5s ease;
 }
 
 @keyframes cakeFloat {
-    to { transform: translateY(-5px); }
+    to {
+        transform: translateY(-5px);
+    }
+}
+
+.cake.cake-cut {
+    opacity: 0;
+    transform: scale(.2) rotate(-25deg);
+    pointer-events: none;
 }
 
 .cake-bottom, .cake-top {
@@ -232,13 +276,24 @@ input {
     height: 43px;
     border-radius: 4px;
     background: repeating-linear-gradient(
-        45deg, #fff 0 6px, #ff69a8 6px 12px
+        45deg,
+        #fff 0 6px,
+        #ff69a8 6px 12px
     );
+    z-index: 2;
 }
 
-.candle:nth-child(1) { left: 48px; }
-.candle:nth-child(2) { left: 89px; }
-.candle:nth-child(3) { left: 130px; }
+.candle:nth-child(1) {
+    left: 48px;
+}
+
+.candle:nth-child(2) {
+    left: 89px;
+}
+
+.candle:nth-child(3) {
+    left: 130px;
+}
 
 .flame {
     position: absolute;
@@ -254,56 +309,137 @@ input {
 }
 
 @keyframes flame {
-    to { transform: rotate(-35deg) scale(1.15); }
+    to {
+        transform: rotate(-35deg) scale(1.15);
+    }
 }
 
+/* Birthday message rises from the bottom */
+
 #birthdayBalloonText {
-    position: relative;
-    z-index: 5;
-    font-size: clamp(20px, 5vw, 30px);
+    position: absolute;
+    left: 5px;
+    right: 5px;
+    bottom: -120px;
+    z-index: 12;
+    opacity: 0;
+    padding: 12px 5px;
+    font-size: clamp(22px, 6vw, 34px);
+    line-height: 1.5;
     color: #ffe6a2;
     font-weight: bold;
-    margin: 20px auto;
-    opacity: 0;
+    text-shadow:
+        0 0 8px #ff5b9b,
+        0 0 18px #ff5b9b,
+        0 0 30px #ffd76a;
+    pointer-events: none;
 }
 
 #birthdayBalloonText.show {
-    opacity: 1;
-    animation: balloonRise 2s ease;
+    animation: birthdayBalloonRise 3s ease-out forwards;
 }
 
-@keyframes balloonRise {
-    from { transform: translateY(80px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+@keyframes birthdayBalloonRise {
+    0% {
+        bottom: -120px;
+        opacity: 0;
+        transform: scale(.65);
+    }
+
+    60% {
+        opacity: 1;
+        transform: scale(1.08);
+    }
+
+    100% {
+        bottom: 85px;
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
-.confetti {
+/* Colourful balloons */
+
+.celebration-balloon {
     position: absolute;
-    top: 10%;
-    width: 8px;
-    height: 14px;
-    animation: confettiFall 2.5s linear forwards;
-    z-index: 10;
+    bottom: -100px;
+    z-index: 8;
+    font-size: 38px;
+    pointer-events: none;
+    animation: balloonFly 4.5s ease-in forwards;
 }
 
-@keyframes confettiFall {
-    to {
-        transform: translateY(500px) rotate(800deg);
+@keyframes balloonFly {
+    0% {
+        transform: translateY(0) rotate(-8deg);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    50% {
+        transform: translateY(-200px) rotate(8deg);
+    }
+
+    100% {
+        transform: translateY(-500px) rotate(-8deg);
         opacity: 0;
     }
 }
 
+/* Confetti blasts from the left and right corners */
+
+.confetti {
+    position: absolute;
+    width: 9px;
+    height: 15px;
+    z-index: 15;
+    pointer-events: none;
+    animation: paperBlast 1.8s ease-out forwards;
+}
+
+@keyframes paperBlast {
+    0% {
+        transform: translate(0, 0) rotate(0deg) scale(.5);
+        opacity: 1;
+    }
+
+    100% {
+        transform:
+            translate(var(--blast-x), var(--blast-y))
+            rotate(720deg)
+            scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* Background fireworks */
+
 .firework {
     position: absolute;
-    font-size: 25px;
-    animation: fireworkPop 1s ease-out forwards;
+    z-index: 5;
+    font-size: 27px;
     pointer-events: none;
+    animation: fireworkPop 1.1s ease-out forwards;
 }
 
 @keyframes fireworkPop {
-    0% { transform: scale(.1); opacity: 0; }
-    50% { transform: scale(1.8); opacity: 1; }
-    100% { transform: scale(2.5); opacity: 0; }
+    0% {
+        transform: scale(.1);
+        opacity: 0;
+    }
+
+    45% {
+        transform: scale(1.8);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(2.5);
+        opacity: 0;
+    }
 }
 
 /* PAGE 4: ROYAL LOVE */
@@ -316,11 +452,6 @@ input {
 .royal-title {
     margin: 0 0 8px;
     font-size: clamp(25px, 6vw, 38px);
-}
-
-.royal-subtitle {
-    min-height: 25px;
-    color: #ffe8a2;
 }
 
 .fan-stage {
@@ -371,57 +502,85 @@ input {
     display: none;
 }
 
-/*
-   IMPORTANT CORRECTION:
-   Photo appears full-screen on mobile.
-   object-fit: contain shows the entire photo.
-   No cropping.
-*/
+/* Medium-size photo in the centre */
 
 .royal-card.revealing {
     position: fixed !important;
-    inset: 0 !important;
 
-    width: 100vw !important;
-    height: 100vh !important;
-    height: 100dvh !important;
+    width: min(78vw, 340px) !important;
+    height: min(68vh, 450px) !important;
+    height: min(68dvh, 450px) !important;
 
+    left: 50% !important;
+    top: 50% !important;
+    bottom: auto !important;
+    right: auto !important;
     margin: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    top: 0 !important;
-    bottom: 0 !important;
 
-    padding: 12px !important;
-    border: 4px solid #ffd76a !important;
-    border-radius: 0 !important;
+    padding: 8px !important;
 
-    transform: none !important;
-    transform-origin: center !important;
+    transform: translate(-50%, -50%) rotateY(0deg) scale(1) !important;
 
-    background: #100811 !important;
-    box-shadow: 0 0 35px #ff5b9b !important;
+    border: 3px solid #ffd76a !important;
+    border-radius: 16px !important;
+
+    background: #170719 !important;
+    box-shadow: 0 0 25px #ff5b9b !important;
 
     display: flex !important;
-    justify-content: center !important;
     align-items: center !important;
+    justify-content: center !important;
 
     z-index: 99999 !important;
+    overflow: hidden !important;
+
+    animation: photoFlipIn .7s ease both;
     cursor: default;
+}
+
+@keyframes photoFlipIn {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotateY(90deg) scale(.7);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translate(-50%, -50%) rotateY(-10deg) scale(1.04);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) rotateY(0deg) scale(1);
+    }
+}
+
+/* Photo rolls away before the next card appears */
+
+.royal-card.returning {
+    animation: photoRollBack .55s ease-in forwards !important;
+    pointer-events: none;
+}
+
+@keyframes photoRollBack {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) rotateY(0deg) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) rotateY(100deg) scale(.55);
+    }
 }
 
 .royal-card.revealing img {
     display: block !important;
-
     width: 100% !important;
     height: 100% !important;
-
-    max-width: 100% !important;
-    max-height: 100% !important;
-
     object-fit: contain !important;
-    background: #100811;
-    border-radius: 5px;
+    background: #170719;
+    border-radius: 10px;
 }
 
 .royal-card.revealing .card-back {
@@ -483,8 +642,13 @@ input {
 }
 
 @keyframes roseRoll {
-    from { transform: translateX(-30vw) rotate(0deg); }
-    to { transform: translateX(30vw) rotate(720deg); }
+    from {
+        transform: translateX(-30vw) rotate(0deg);
+    }
+
+    to {
+        transform: translateX(30vw) rotate(720deg);
+    }
 }
 
 #wrongCodeEmoji {
@@ -496,9 +660,20 @@ input {
 }
 
 @keyframes angryZoom {
-    0% { transform: scale(.1); opacity: 0; }
-    50% { transform: scale(2); opacity: 1; }
-    100% { transform: scale(0); opacity: 0; }
+    0% {
+        transform: scale(.1);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
 }
 
 /* PAGE 6: GIFT */
@@ -511,7 +686,9 @@ input {
 }
 
 @keyframes giftBounce {
-    to { transform: translateY(-10px) rotate(3deg); }
+    to {
+        transform: translateY(-10px) rotate(3deg);
+    }
 }
 
 .song-card {
@@ -519,7 +696,7 @@ input {
     padding: 22px;
     border: 2px solid var(--gold);
     border-radius: 22px;
-    background: #40133c;
+    background: rgba(64, 19, 60, .88);
     animation: pageIn .8s ease;
 }
 
@@ -529,7 +706,9 @@ input {
 }
 
 @keyframes noteDance {
-    to { transform: translateY(-12px) rotate(10deg); }
+    to {
+        transform: translateY(-12px) rotate(10deg);
+    }
 }
 
 /* PAGE 7: SCRATCH CARDS */
@@ -581,7 +760,9 @@ input {
 }
 
 @keyframes finalGlow {
-    to { transform: scale(1.03); }
+    to {
+        transform: scale(1.03);
+    }
 }
 
 @media (max-width: 400px) {
@@ -599,7 +780,8 @@ input {
     }
 
     .royal-card.revealing {
-        padding: 8px !important;
+        width: 78vw !important;
+        height: 60dvh !important;
     }
 }
 </style>
@@ -645,17 +827,27 @@ input {
 <!-- PAGE 3: CAKE CELEBRATION -->
 
 <section class="page" id="page3">
+
     <div class="celebration-frame" id="celebrationFrame">
 
         <div class="cake" id="birthdayCake" role="button"
              aria-label="Birthday cake">
 
-            <div class="candle"><div class="flame"></div></div>
-            <div class="candle"><div class="flame"></div></div>
-            <div class="candle"><div class="flame"></div></div>
+            <div class="candle">
+                <div class="flame"></div>
+            </div>
+
+            <div class="candle">
+                <div class="flame"></div>
+            </div>
+
+            <div class="candle">
+                <div class="flame"></div>
+            </div>
 
             <div class="cake-top"></div>
             <div class="cake-bottom"></div>
+
         </div>
 
         <div id="birthdayBalloonText">
@@ -663,6 +855,7 @@ input {
         </div>
 
     </div>
+
 </section>
 
 <!-- PAGE 4: ROYAL LOVE -->
@@ -670,8 +863,6 @@ input {
 <section class="page" id="page4">
 
     <h1 class="royal-title">Royal Love ❤️👑</h1>
-
-    <div class="royal-subtitle">18 Golden Moments ✨</div>
 
     <div class="fan-stage" id="fanStage"></div>
 
@@ -685,7 +876,7 @@ input {
 
 </section>
 
-<!-- PAGE 5: GREETING CARD + NEW LETTER -->
+<!-- PAGE 5: GREETING CARD -->
 
 <section class="page" id="page5">
 
@@ -855,6 +1046,8 @@ let cakeTimer = null;
 let royalStarted = false;
 let letterTimer = null;
 
+let celebrationTimers = [];
+
 function goToPage(number) {
     pages.forEach(page => page.classList.remove("active"));
 
@@ -900,26 +1093,6 @@ function showHearts() {
 }
 
 setInterval(showHearts, 700);
-
-function fireworks(container, count = 18) {
-    for (let i = 0; i < count; i++) {
-
-        const fw = document.createElement("div");
-
-        fw.className = "firework";
-
-        fw.textContent = [
-            "✨", "🎆", "💥", "⭐", "🌟"
-        ][Math.floor(Math.random() * 5)];
-
-        fw.style.left = Math.random() * 90 + "%";
-        fw.style.top = Math.random() * 80 + "%";
-
-        container.appendChild(fw);
-
-        setTimeout(() => fw.remove(), 1200);
-    }
-}
 
 /* PAGE 1: DOUBLE TAP */
 
@@ -986,7 +1159,7 @@ mainPin.addEventListener("keydown", event => {
     if (event.key === "Enter") checkMainPin();
 });
 
-/* PAGE 3: CAKE */
+/* PAGE 3: CAKE CELEBRATION */
 
 const cake = document.getElementById("birthdayCake");
 
@@ -998,69 +1171,195 @@ const birthdayBalloonText =
 
 let cakeCut = false;
 
+function clearCelebrationTimers() {
+    celebrationTimers.forEach(timer => {
+        clearTimeout(timer);
+        clearInterval(timer);
+    });
+
+    celebrationTimers = [];
+}
+
+function launchCornerConfetti(side) {
+
+    const colors = [
+        "#ff5b9b",
+        "#ffd76a",
+        "#7ce7ff",
+        "#b6ff8c",
+        "#d9a3ff",
+        "#ffffff",
+        "#ff7043",
+        "#65ffdb"
+    ];
+
+    for (let i = 0; i < 45; i++) {
+
+        const paper = document.createElement("div");
+
+        paper.className = "confetti";
+
+        paper.style.background =
+            colors[Math.floor(Math.random() * colors.length)];
+
+        paper.style.top = (10 + Math.random() * 25) + "%";
+
+        if (side === "left") {
+
+            paper.style.left = "0";
+
+            paper.style.setProperty(
+                "--blast-x",
+                (100 + Math.random() * 180) + "px"
+            );
+
+        } else {
+
+            paper.style.right = "0";
+
+            paper.style.setProperty(
+                "--blast-x",
+                (-100 - Math.random() * 180) + "px"
+            );
+        }
+
+        paper.style.setProperty(
+            "--blast-y",
+            (100 + Math.random() * 220) + "px"
+        );
+
+        paper.style.animationDelay =
+            (Math.random() * .35) + "s";
+
+        celebrationFrame.appendChild(paper);
+
+        const timer = setTimeout(() => paper.remove(), 2500);
+
+        celebrationTimers.push(timer);
+    }
+}
+
+function launchBirthdayFireworks() {
+
+    const symbols = ["🎆", "✨", "💥", "🌟", "🎇"];
+
+    for (let i = 0; i < 12; i++) {
+
+        const blast = document.createElement("div");
+
+        blast.className = "firework";
+
+        blast.textContent =
+            symbols[Math.floor(Math.random() * symbols.length)];
+
+        blast.style.left = (5 + Math.random() * 90) + "%";
+
+        blast.style.top = (5 + Math.random() * 75) + "%";
+
+        celebrationFrame.appendChild(blast);
+
+        const timer = setTimeout(() => blast.remove(), 1300);
+
+        celebrationTimers.push(timer);
+    }
+}
+
+function launchColourBalloons() {
+
+    const balloons = [
+        "🎈", "🎈", "🎈", "🎈", "🎈",
+        "🎈", "🎈", "🎈", "🎈", "🎈"
+    ];
+
+    for (let i = 0; i < balloons.length; i++) {
+
+        const balloon = document.createElement("div");
+
+        balloon.className = "celebration-balloon";
+
+        balloon.textContent = balloons[i];
+
+        balloon.style.left = (5 + Math.random() * 85) + "%";
+
+        balloon.style.animationDelay =
+            (Math.random() * 1.1) + "s";
+
+        celebrationFrame.appendChild(balloon);
+
+        const timer = setTimeout(() => balloon.remove(), 5500);
+
+        celebrationTimers.push(timer);
+    }
+}
+
 cake.addEventListener("click", function() {
 
     if (cakeCut) return;
 
     cakeCut = true;
 
-    cake.style.transform = "rotate(-8deg) scale(.85)";
-    cake.style.transition = "transform .5s ease";
+    /* Cake disappears after cutting */
+
+    cake.classList.add("cake-cut");
 
     document.querySelectorAll(".flame").forEach(flame => {
         flame.style.opacity = "0";
     });
 
-    for (const side of ["left", "right"]) {
+    /* Confetti blast from both corners */
 
-        for (let i = 0; i < 45; i++) {
+    launchCornerConfetti("left");
+    launchCornerConfetti("right");
 
-            const bit = document.createElement("div");
+    /* Colourful balloons rise */
 
-            bit.className = "confetti";
+    launchColourBalloons();
 
-            bit.style.background = [
-                "#ff5b9b",
-                "#ffd76a",
-                "#7ce7ff",
-                "#b6ff8c",
-                "#d9a3ff",
-                "#ffffff"
-            ][Math.floor(Math.random() * 6)];
+    /* Birthday message rises from the bottom */
 
-            bit.style.left = side === "left"
-                ? Math.random() * 25 + "%"
-                : 75 + Math.random() * 20 + "%";
+    birthdayBalloonText.textContent =
+        "🎈 Happy Birthday Chlm ❤️ 🎈";
 
-            bit.style.top =
-                (5 + Math.random() * 20) + "%";
+    birthdayBalloonText.classList.remove("show");
 
-            bit.style.animationDelay =
-                Math.random() * .6 + "s";
-
-            celebrationFrame.appendChild(bit);
-
-            setTimeout(() => bit.remove(), 3500);
-        }
-    }
+    void birthdayBalloonText.offsetWidth;
 
     birthdayBalloonText.classList.add("show");
 
-    let bursts = 0;
+    /* Fireworks continue in the background */
 
-    const fwTimer = setInterval(() => {
+    launchBirthdayFireworks();
 
-        fireworks(celebrationFrame, 8);
+    let burstCount = 0;
 
-        bursts++;
+    const fireworkInterval = setInterval(() => {
 
-        if (bursts >= 5) clearInterval(fwTimer);
+        if (currentPage !== 3 || burstCount >= 5) {
 
-    }, 500);
+            clearInterval(fireworkInterval);
+
+            return;
+        }
+
+        launchBirthdayFireworks();
+
+        burstCount++;
+
+    }, 700);
+
+    celebrationTimers.push(fireworkInterval);
+
+    /* Move to Royal Love after celebration */
 
     cakeTimer = setTimeout(() => {
+
+        clearCelebrationTimers();
+
         goToPage(4);
-    }, 5200);
+
+    }, 6000);
+
+    celebrationTimers.push(cakeTimer);
 
 });
 
@@ -1079,6 +1378,7 @@ const royalCards = [];
 function createRoyalCards() {
 
     fanStage.innerHTML = "";
+
     royalCards.length = 0;
 
     for (let i = 0; i < 18; i++) {
@@ -1090,19 +1390,25 @@ function createRoyalCards() {
         const back = document.createElement("div");
 
         back.className = "card-back";
-        back.textContent = "KING 👑";
+
+        back.textContent = i % 2 === 0
+            ? "KING 👑"
+            : "QUEEN 👑";
 
         const img = document.createElement("img");
 
         img.src = "photo" + (i + 1) + ".jpg";
+
         img.alt = "Royal memory " + (i + 1);
 
         card.appendChild(back);
+
         card.appendChild(img);
 
         fanStage.appendChild(card);
 
         const angle = (i - 8.5) * 5.3;
+
         const spread = (i - 8.5) * 12;
 
         card.style.transform = `rotate(${angle}deg)`;
@@ -1133,7 +1439,7 @@ function startRoyalSequence() {
 
     royalStart.classList.add("hidden");
 
-    royalMessage.textContent = "Our golden moments ❤️";
+    royalMessage.textContent = "Royal Love ❤️👑";
 
     let index = 0;
 
@@ -1155,31 +1461,45 @@ function startRoyalSequence() {
 
         const img = card.querySelector("img");
 
-        card.style.zIndex = "100";
+        card.style.zIndex = "99999";
+
+        card.classList.remove("returning");
 
         card.classList.add("revealing");
 
         royalMessage.textContent =
-            "Memory " + (index + 1) + " ❤️";
-
-        img.onerror = function() {
-            img.alt = "Check photo" + (index + 1) + ".jpg";
-        };
+            "❤️ " + (index + 1) + " / 18 ❤️";
 
         /*
-         * The card becomes a fixed full-screen frame.
-         * The full photo fits inside the screen.
+         * Show the photo in the centre for 2 seconds.
          */
 
         setTimeout(() => {
 
+            /*
+             * Flip/roll the photo away before the next photo.
+             */
+
             card.classList.remove("revealing");
 
-            card.style.zIndex = String(index + 1);
+            card.classList.add("returning");
 
-            index++;
+            setTimeout(() => {
 
-            setTimeout(showNextCard, 250);
+                card.classList.remove("returning");
+
+                card.style.zIndex = String(index + 1);
+
+                index++;
+
+                /*
+                 * The next photo appears only after
+                 * the previous photo has rolled away.
+                 */
+
+                setTimeout(showNextCard, 250);
+
+            }, 550);
 
         }, 2000);
     }
@@ -1189,7 +1509,7 @@ function startRoyalSequence() {
 
 royalStart.addEventListener("click", startRoyalSequence);
 
-/* PAGE 5: NEW SHORT BIRTHDAY LETTER */
+/* PAGE 5: BIRTHDAY LETTER */
 
 const letterCode = document.getElementById("letterCode");
 
@@ -1282,7 +1602,9 @@ document.getElementById("letterUnlock")
 letterCode.addEventListener("keydown", event => {
 
     if (event.key === "Enter") {
+
         document.getElementById("letterUnlock").click();
+
     }
 
 });
@@ -1315,6 +1637,7 @@ giftBox.addEventListener("click", function() {
     bgMusic.pause();
 
     favoriteMusic.currentTime = 0;
+
     favoriteMusic.volume = 0.8;
 
     const result = favoriteMusic.play();
@@ -1326,7 +1649,11 @@ giftBox.addEventListener("click", function() {
 });
 
 favoriteMusic.addEventListener("ended", function() {
+
+    if (currentPage !== 6) return;
+
     tryStartBackgroundMusic();
+
 });
 
 document.getElementById("songContinue")
@@ -1374,6 +1701,7 @@ document.getElementById("secretPinButton")
 
             secretPinMessage.textContent =
                 "Wrong PIN 💔 Try again";
+
         }
 
     });
@@ -1381,7 +1709,9 @@ document.getElementById("secretPinButton")
 secretPin.addEventListener("keydown", event => {
 
     if (event.key === "Enter") {
+
         document.getElementById("secretPinButton").click();
+
     }
 
 });
@@ -1407,9 +1737,13 @@ const scratchCtx =
     scratchCanvas.getContext("2d");
 
 let scratchNumber = 1;
+
 let scratchCompleted = false;
+
 let scratchReady = false;
+
 let scratchRevealing = false;
+
 let lastScratchPoint = null;
 
 function sizeScratchCanvas() {
@@ -1440,7 +1774,9 @@ function drawScratchCover() {
     );
 
     gradient.addColorStop(0, "#f7d77c");
+
     gradient.addColorStop(.5, "#b36a9c");
+
     gradient.addColorStop(1, "#4e1d53");
 
     scratchCtx.fillStyle = gradient;
@@ -1460,6 +1796,7 @@ function drawScratchCover() {
         const y = 25 + Math.random() * (rect.height - 50);
 
         scratchCtx.fillText("✦", x, y);
+
     }
 
     scratchCtx.fillStyle = "#ffffff";
@@ -1486,9 +1823,18 @@ function drawScratchCover() {
 function setupScratchCard() {
 
     scratchCompleted = false;
+
     scratchReady = false;
+
     scratchRevealing = false;
+
     lastScratchPoint = null;
+
+    scratchCanvas.classList.remove("hidden");
+
+    scratchCanvas.style.opacity = "1";
+
+    scratchCanvas.style.transition = "none";
 
     scratchTitle.textContent = scratchNumber === 1
         ? "Secret Memory 1 ❤️"
@@ -1526,12 +1872,16 @@ function scratchAt(x, y) {
         !scratchReady ||
         scratchCompleted ||
         scratchRevealing
-    ) return;
+    ) {
+        return;
+    }
 
     scratchCtx.globalCompositeOperation = "destination-out";
 
     scratchCtx.lineWidth = 38;
+
     scratchCtx.lineCap = "round";
+
     scratchCtx.lineJoin = "round";
 
     if (lastScratchPoint) {
@@ -1554,6 +1904,7 @@ function scratchAt(x, y) {
         scratchCtx.arc(x, y, 19, 0, Math.PI * 2);
 
         scratchCtx.fill();
+
     }
 
     lastScratchPoint = { x, y };
@@ -1579,12 +1930,15 @@ function checkScratchProgress() {
         sampled++;
 
         if (pixels[i] < 80) transparent++;
+
     }
 
     const ratio = sampled ? transparent / sampled : 0;
 
     if (ratio > 0.38) {
+
         revealScratchPhoto();
+
     }
 }
 
@@ -1612,7 +1966,9 @@ scratchCanvas.addEventListener("pointermove", function(event) {
         !scratchReady ||
         scratchCompleted ||
         event.buttons === 0
-    ) return;
+    ) {
+        return;
+    }
 
     event.preventDefault();
 
@@ -1623,11 +1979,15 @@ scratchCanvas.addEventListener("pointermove", function(event) {
 });
 
 scratchCanvas.addEventListener("pointerup", function() {
+
     lastScratchPoint = null;
+
 });
 
 scratchCanvas.addEventListener("pointercancel", function() {
+
     lastScratchPoint = null;
+
 });
 
 function revealScratchPhoto() {
@@ -1635,7 +1995,9 @@ function revealScratchPhoto() {
     if (scratchCompleted || scratchRevealing) return;
 
     scratchRevealing = true;
+
     scratchCompleted = true;
+
     scratchReady = false;
 
     scratchCanvas.style.transition = "opacity .5s ease";
@@ -1651,15 +2013,16 @@ function revealScratchPhoto() {
 
     }, 550);
 
+    /*
+     * Keep each revealed photo visible for 3 seconds.
+     * Then show the next photo or the final page.
+     */
+
     setTimeout(() => {
 
         if (scratchNumber === 1) {
 
             scratchNumber = 2;
-
-            scratchCanvas.classList.remove("hidden");
-
-            scratchCanvas.style.opacity = "1";
 
             setupScratchCard();
 
@@ -1679,6 +2042,8 @@ document.getElementById("replayButton")
 
         clearTimeout(cakeTimer);
 
+        clearCelebrationTimers();
+
         clearInterval(letterTimer);
 
         favoriteMusic.pause();
@@ -1689,9 +2054,11 @@ document.getElementById("replayButton")
 
         tryStartBackgroundMusic();
 
+        /* Reset cake */
+
         cakeCut = false;
 
-        cake.style.transform = "";
+        cake.classList.remove("cake-cut");
 
         document.querySelectorAll(".flame").forEach(flame => {
             flame.style.opacity = "1";
@@ -1699,13 +2066,11 @@ document.getElementById("replayButton")
 
         birthdayBalloonText.classList.remove("show");
 
-        document.querySelectorAll(".confetti").forEach(item => {
-            item.remove();
-        });
+        celebrationFrame.querySelectorAll(
+            ".confetti, .firework, .celebration-balloon"
+        ).forEach(item => item.remove());
 
-        document.querySelectorAll(".firework").forEach(item => {
-            item.remove();
-        });
+        /* Reset Royal Love */
 
         royalStarted = false;
 
@@ -1715,6 +2080,8 @@ document.getElementById("replayButton")
             "Touch the first King card 👑";
 
         createRoyalCards();
+
+        /* Reset letter */
 
         letterOpened = false;
 
@@ -1728,11 +2095,15 @@ document.getElementById("replayButton")
 
         letterText.textContent = "";
 
+        /* Reset gift */
+
         giftOpened = false;
 
         giftBox.classList.remove("hidden");
 
         songCard.classList.add("hidden");
+
+        /* Reset secret cards */
 
         secretPin.value = "";
 
@@ -1744,9 +2115,19 @@ document.getElementById("replayButton")
 
         scratchNumber = 1;
 
+        scratchCompleted = false;
+
+        scratchReady = false;
+
+        scratchRevealing = false;
+
         scratchCanvas.classList.remove("hidden");
 
         scratchCanvas.style.opacity = "1";
+
+        scratchCanvas.style.transition = "none";
+
+        /* Reset main PIN */
 
         mainPin.value = "";
 
@@ -1755,6 +2136,8 @@ document.getElementById("replayButton")
         pinMessage.textContent = "";
 
         pinMessage.className = "";
+
+        /* Reset opening screen */
 
         openingStarted = false;
 
@@ -1773,12 +2156,14 @@ window.addEventListener("resize", function() {
         !scratchArea.classList.contains("hidden") &&
         !scratchCompleted
     ) {
+
         sizeScratchCanvas();
+
     }
 
 });
 
-/* START MUSIC AFTER FIRST INTERACTION IF NEEDED */
+/* START BACKGROUND MUSIC AFTER USER INTERACTION */
 
 document.addEventListener("pointerdown", function() {
 
@@ -1787,10 +2172,12 @@ document.addEventListener("pointerdown", function() {
         bgMusic.paused &&
         favoriteMusic.paused
     ) {
+
         tryStartBackgroundMusic();
+
     }
 
-}, { once: true });
+});
 
 </script>
 
