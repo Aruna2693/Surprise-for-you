@@ -36,8 +36,6 @@ body {
     width: 100%;
     padding: 24px 14px;
     overflow: hidden;
-
-    /* Background photo on every page */
     background:
         linear-gradient(rgba(20, 4, 25, .52), rgba(20, 4, 25, .62)),
         url("background.jpg") center center / cover no-repeat;
@@ -56,7 +54,6 @@ body {
         opacity: 0;
         transform: scale(.97);
     }
-
     to {
         opacity: 1;
         transform: scale(1);
@@ -134,7 +131,6 @@ input {
         transform: scale(1);
         text-shadow: 0 0 10px #ff4caa;
     }
-
     to {
         transform: scale(1.04);
         text-shadow: 0 0 28px #ff4caa;
@@ -187,11 +183,9 @@ input {
     0% {
         transform: scale(1);
     }
-
     50% {
         transform: scale(1.8) rotate(-15deg);
     }
-
     100% {
         transform: scale(0);
         opacity: 0;
@@ -214,12 +208,10 @@ input {
     background: rgba(39, 13, 45, .55);
     box-shadow: 0 0 30px #ff6cae66;
     position: relative;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     overflow: hidden;
     isolation: isolate;
 }
@@ -246,6 +238,7 @@ input {
     opacity: 0;
     transform: scale(.2) rotate(-25deg);
     pointer-events: none;
+    animation: none;
 }
 
 .cake-bottom, .cake-top {
@@ -345,12 +338,10 @@ input {
         opacity: 0;
         transform: scale(.65);
     }
-
     60% {
         opacity: 1;
         transform: scale(1.08);
     }
-
     100% {
         bottom: 85px;
         opacity: 1;
@@ -374,15 +365,12 @@ input {
         transform: translateY(0) rotate(-8deg);
         opacity: 0;
     }
-
     15% {
         opacity: 1;
     }
-
     50% {
         transform: translateY(-200px) rotate(8deg);
     }
-
     100% {
         transform: translateY(-500px) rotate(-8deg);
         opacity: 0;
@@ -405,7 +393,6 @@ input {
         transform: translate(0, 0) rotate(0deg) scale(.5);
         opacity: 1;
     }
-
     100% {
         transform:
             translate(var(--blast-x), var(--blast-y))
@@ -430,12 +417,10 @@ input {
         transform: scale(.1);
         opacity: 0;
     }
-
     45% {
         transform: scale(1.8);
         opacity: 1;
     }
-
     100% {
         transform: scale(2.5);
         opacity: 0;
@@ -493,6 +478,12 @@ input {
     color: #ffe5a3;
 }
 
+/* Every card shows only the King label */
+
+.royal-card .card-back::before {
+    content: "KING 👑";
+}
+
 .royal-card img {
     width: 100%;
     height: 100%;
@@ -506,34 +497,25 @@ input {
 
 .royal-card.revealing {
     position: fixed !important;
-
     width: min(78vw, 340px) !important;
     height: min(68vh, 450px) !important;
     height: min(68dvh, 450px) !important;
-
     left: 50% !important;
     top: 50% !important;
     bottom: auto !important;
     right: auto !important;
     margin: 0 !important;
-
     padding: 8px !important;
-
     transform: translate(-50%, -50%) rotateY(0deg) scale(1) !important;
-
     border: 3px solid #ffd76a !important;
     border-radius: 16px !important;
-
     background: #170719 !important;
     box-shadow: 0 0 25px #ff5b9b !important;
-
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-
     z-index: 99999 !important;
     overflow: hidden !important;
-
     animation: photoFlipIn .7s ease both;
     cursor: default;
 }
@@ -543,12 +525,10 @@ input {
         opacity: 0;
         transform: translate(-50%, -50%) rotateY(90deg) scale(.7);
     }
-
     60% {
         opacity: 1;
         transform: translate(-50%, -50%) rotateY(-10deg) scale(1.04);
     }
-
     100% {
         opacity: 1;
         transform: translate(-50%, -50%) rotateY(0deg) scale(1);
@@ -567,7 +547,6 @@ input {
         opacity: 1;
         transform: translate(-50%, -50%) rotateY(0deg) scale(1);
     }
-
     100% {
         opacity: 0;
         transform: translate(-50%, -50%) rotateY(100deg) scale(.55);
@@ -645,7 +624,6 @@ input {
     from {
         transform: translateX(-30vw) rotate(0deg);
     }
-
     to {
         transform: translateX(30vw) rotate(720deg);
     }
@@ -664,12 +642,10 @@ input {
         transform: scale(.1);
         opacity: 0;
     }
-
     50% {
         transform: scale(2);
         opacity: 1;
     }
-
     100% {
         transform: scale(0);
         opacity: 0;
@@ -1391,9 +1367,13 @@ function createRoyalCards() {
 
         back.className = "card-back";
 
-        back.textContent = i % 2 === 0
-            ? "KING 👑"
-            : "QUEEN 👑";
+        /*
+         * IMPORTANT:
+         * All 18 cards show KING only.
+         * No QUEEN label.
+         */
+
+        back.textContent = "KING 👑";
 
         const img = document.createElement("img");
 
@@ -1459,8 +1439,6 @@ function startRoyalSequence() {
 
         const card = royalCards[index];
 
-        const img = card.querySelector("img");
-
         card.style.zIndex = "99999";
 
         card.classList.remove("returning");
@@ -1470,15 +1448,11 @@ function startRoyalSequence() {
         royalMessage.textContent =
             "❤️ " + (index + 1) + " / 18 ❤️";
 
-        /*
-         * Show the photo in the centre for 2 seconds.
-         */
+        /* Show the photo in the centre for 2 seconds */
 
         setTimeout(() => {
 
-            /*
-             * Flip/roll the photo away before the next photo.
-             */
+            /* Flip/roll the photo away */
 
             card.classList.remove("revealing");
 
@@ -1492,10 +1466,7 @@ function startRoyalSequence() {
 
                 index++;
 
-                /*
-                 * The next photo appears only after
-                 * the previous photo has rolled away.
-                 */
+                /* Show the next photo after the previous one leaves */
 
                 setTimeout(showNextCard, 250);
 
@@ -2013,10 +1984,7 @@ function revealScratchPhoto() {
 
     }, 550);
 
-    /*
-     * Keep each revealed photo visible for 3 seconds.
-     * Then show the next photo or the final page.
-     */
+    /* Keep each revealed photo visible for 3 seconds */
 
     setTimeout(() => {
 
