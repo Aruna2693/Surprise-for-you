@@ -6,475 +6,531 @@
 <title>For My Chlm ❤️</title>
 
 <style>
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --pink:#ff69b4;
+  --light:#ffd6e9;
+  --gold:#ffe4a3;
+  --purple:#3b1033;
 }
 
-body {
-  font-family: Georgia, serif;
-  min-height: 100vh;
-  overflow: hidden;
-  color: white;
+body{
+  font-family:Georgia,serif;
+  min-height:100vh;
+  overflow:hidden;
+  color:white;
+  background:#260c25;
+}
+
+button,input{font:inherit}
+button{border:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
+
+.page{
+  display:none;
+  position:fixed;
+  inset:0;
+  padding:16px;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  text-align:center;
+  overflow:hidden;
   background:
-    linear-gradient(rgba(35,0,28,.55),rgba(35,0,28,.72)),
-    url("background.jpg") center/cover fixed;
+    linear-gradient(rgba(35,0,28,.68),rgba(35,0,28,.78)),
+    url("background.jpg") center/cover no-repeat;
 }
 
-button,input {
-  font: inherit;
+.page.active{
+  display:flex;
+  animation:pageIn .6s ease;
 }
 
-button {
-  border: 0;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
+@keyframes pageIn{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
-.page {
-  display: none;
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  padding: 16px;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  text-align: center;
-  overflow: hidden;
-  animation: rise .7s ease;
+h1{
+  color:#ffe3ef;
+  text-shadow:0 0 18px #ff4f9a;
 }
 
-.page.active {
-  display: flex;
+.glow{animation:glow 1.6s infinite alternate}
+
+@keyframes glow{
+  to{text-shadow:0 0 20px white,0 0 35px #ff1493}
 }
 
-@keyframes rise {
-  from { opacity: 0; transform: translateY(35px); }
-  to { opacity: 1; transform: translateY(0); }
+.btn{
+  margin:10px;
+  padding:12px 22px;
+  border-radius:30px;
+  background:linear-gradient(135deg,#ffb6d5,#ff4f9a);
+  color:#4a123c;
+  font-weight:bold;
+  box-shadow:0 0 18px #ff69b4;
 }
 
-h1 {
-  color: #ffe3ef;
-  text-shadow: 0 0 18px #ff4f9a;
+.floating{
+  position:fixed;
+  bottom:-40px;
+  z-index:900;
+  pointer-events:none;
+  animation:floatUp 6s linear forwards;
 }
 
-.glow {
-  animation: glow 1.8s infinite alternate;
-}
-
-@keyframes glow {
-  from { text-shadow: 0 0 8px #ff69b4; }
-  to { text-shadow: 0 0 25px white,0 0 35px #ff1493; }
-}
-
-.btn {
-  margin: 12px;
-  padding: 12px 22px;
-  border-radius: 30px;
-  background: linear-gradient(135deg,#ffb6d5,#ff4f9a);
-  color: #4a123c;
-  font-weight: bold;
-  box-shadow: 0 0 18px #ff69b4;
-}
-
-.small {
-  font-size: 13px;
-  margin-top: 12px;
-}
-
-.floating {
-  position: fixed;
-  z-index: 900;
-  pointer-events: none;
-  animation: floatUp 5s linear forwards;
-}
-
-@keyframes floatUp {
-  from { transform: translateY(100vh) rotate(0); opacity: 1; }
-  to { transform: translateY(-15vh) rotate(360deg); opacity: 0; }
+@keyframes floatUp{
+  to{transform:translateY(-115vh) rotate(360deg);opacity:0}
 }
 
 /* OPENING */
 
-#openingText {
-  font-size: clamp(25px,7vw,42px);
-  padding: 25px;
-  cursor: pointer;
-  user-select: none;
-  color: #fff1f8;
-  text-shadow: 0 0 20px #ff4f9a;
-  animation: glow 2s infinite alternate;
+#openingText{
+  font-size:clamp(25px,7vw,42px);
+  padding:20px;
+  color:#fff1f8;
+  text-shadow:0 0 20px #ff4f9a;
+  animation:glow 2s infinite alternate;
+  user-select:none;
 }
 
 /* PIN */
 
-.pinBox {
-  width: min(320px,90%);
-  padding: 28px 20px;
-  border: 1px solid #ffc7e1;
-  border-radius: 25px;
-  background: rgba(65,0,45,.82);
-  box-shadow: 0 0 30px #ff4f9a;
+.pinBox{
+  width:min(320px,92vw);
+  padding:25px 20px;
+  border:1px solid #ffc7e1;
+  border-radius:25px;
+  background:rgba(65,0,45,.88);
+  box-shadow:0 0 30px #ff4f9a;
 }
 
-.pinBox h2 {
-  margin-bottom: 20px;
+.pinBox h2{margin-bottom:18px}
+
+.pinBox input{
+  width:100%;
+  padding:13px;
+  text-align:center;
+  letter-spacing:8px;
+  border-radius:15px;
+  border:2px solid pink;
+  background:white;
+  color:#4a123c;
+  font-size:22px;
 }
 
-.pinBox input {
-  width: 100%;
-  padding: 14px;
-  text-align: center;
-  letter-spacing: 8px;
-  border-radius: 15px;
-  border: 2px solid pink;
-  background: white;
-  color: #4a123c;
-  font-size: 22px;
+.pinMessage{
+  min-height:35px;
+  margin-top:10px;
+  font-size:28px;
 }
 
-#pinMessage {
-  margin-top: 15px;
-  min-height: 20px;
+#heartScene{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  align-items:center;
+  justify-content:center;
+  background:#260c25ee;
+  font-size:85px;
 }
 
-#arrowScene {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  align-items: center;
-  justify-content: center;
-  background: rgba(30,0,25,.95);
+#heartScene.show{display:flex;animation:heartBeat .8s infinite alternate}
+
+@keyframes heartBeat{to{transform:scale(1.2)}}
+
+#brokenScene{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  align-items:center;
+  justify-content:center;
+  background:#260c25dd;
+  font-size:80px;
 }
 
-.arrowHeart {
-  font-size: 95px;
-  position: relative;
-  animation: heartBeat .7s infinite alternate;
+#brokenScene.show{display:flex;animation:heartBeat .6s infinite alternate}
+
+/* BIRTHDAY CAKE */
+
+#birthdayTitle{
+  font-size:clamp(25px,7vw,43px);
+  color:#ffe4a3;
 }
 
-.arrow {
-  position: absolute;
-  font-size: 55px;
-  left: -160px;
-  top: 10px;
-  animation: shoot .8s forwards;
+.cakeStage{
+  position:relative;
+  width:min(340px,90vw);
+  height:250px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:20px 0;
 }
 
-@keyframes shoot {
-  to { left: 50px; }
+#cake{
+  font-size:125px;
+  filter:drop-shadow(0 0 20px #ff8cbe);
+  animation:cakeGrow 1.5s ease both,cakeGlow 1.5s infinite alternate;
 }
 
-@keyframes heartBeat {
-  to { transform: scale(1.2); }
+@keyframes cakeGrow{
+  from{transform:scale(.1);opacity:0}
+  to{transform:scale(1);opacity:1}
 }
 
-/* BIRTHDAY */
-
-#birthdayTitle {
-  font-size: clamp(28px,7vw,45px);
-  animation: titleRise 1.5s ease;
+@keyframes cakeGlow{
+  to{filter:drop-shadow(0 0 30px #ff4f9a)}
 }
 
-@keyframes titleRise {
-  from { opacity: 0; transform: translateY(90px); }
-  to { opacity: 1; transform: translateY(0); }
+.cakePiece{
+  position:absolute;
+  display:none;
+  font-size:70px;
 }
 
-#cake {
-  font-size: 110px;
-  margin: 25px 0;
-  cursor: pointer;
-  animation: bounce 1.8s infinite;
+.cakePiece.left{left:10px}
+.cakePiece.right{right:10px}
+
+.cakeStage.cut #cake{opacity:0;transform:scale(.5)}
+.cakeStage.cut .cakePiece{display:block}
+
+.cakeStage.cut .left{animation:leftCake .8s forwards}
+.cakeStage.cut .right{animation:rightCake .8s forwards}
+
+@keyframes leftCake{
+  to{transform:translate(-35px,20px) rotate(-20deg);opacity:0}
 }
 
-@keyframes bounce {
-  50% { transform: translateY(-10px); }
+@keyframes rightCake{
+  to{transform:translate(35px,20px) rotate(20deg);opacity:0}
 }
 
-/* ROYAL LOVE FAN */
+/* BALLOONS AND BIRTHDAY MESSAGE */
 
-#cardsPage {
-  padding: 8px;
+#birthdayEffects{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:800;
+  pointer-events:none;
+  overflow:hidden;
 }
 
-#cardsPage h1 {
-  font-size: 32px;
-  margin: 5px;
+.balloon{
+  position:absolute;
+  bottom:-100px;
+  font-size:42px;
+  animation:balloonUp 4s ease-out forwards;
 }
 
-#fan {
-  position: relative;
-  width: min(350px,96vw);
-  height: min(390px,58vh);
-  perspective: 1200px;
-  margin: 8px auto;
+@keyframes balloonUp{
+  to{transform:translateY(-120vh) rotate(15deg)}
 }
 
-.fanCard {
-  position: absolute;
-  width: 84px;
-  height: 135px;
-  left: 50%;
-  top: 50%;
-  transform-origin: center 155px;
-  transition:
-    left .7s ease,
-    top .7s ease,
-    transform .7s ease;
-  cursor: pointer;
-  perspective: 900px;
-  -webkit-tap-highlight-color: transparent;
+#birthdayBanner{
+  position:absolute;
+  bottom:-100px;
+  left:50%;
+  width:100%;
+  transform:translateX(-50%);
+  font-size:clamp(26px,7vw,45px);
+  font-weight:bold;
+  color:#fff0a6;
+  text-shadow:0 0 15px #ff1493,0 0 30px #ff69b4;
+  opacity:0;
 }
 
-.cardInner {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform .75s ease;
+#birthdayBanner.fly{animation:bannerUp 3s ease-out forwards}
+
+@keyframes bannerUp{
+  0%{bottom:-100px;opacity:0}
+  20%{opacity:1}
+  75%,100%{bottom:53%;opacity:1}
 }
 
-.fanCard.flipped .cardInner {
-  transform: rotateY(180deg);
+.firework{
+  position:fixed;
+  z-index:850;
+  pointer-events:none;
+  font-size:35px;
+  animation:fireworkPop 1.2s ease-out forwards;
 }
 
-.cardFront,
-.cardBack {
-  position: absolute;
-  inset: 0;
-  border-radius: 12px;
-  border: 2px solid #f4d08c;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  box-shadow: 0 0 12px #ffb6d5;
+@keyframes fireworkPop{
+  0%{transform:scale(.1);opacity:0}
+  30%{transform:scale(1.7);opacity:1}
+  100%{transform:scale(2.4) translateY(-20px);opacity:0}
 }
 
-.cardFront {
-  background: linear-gradient(145deg,#fff3f8,#ffb6d5);
-  color: #8b174e;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 25px;
-  font-weight: bold;
+/* ROYAL LOVE */
+
+#cardsPage{padding:8px}
+
+#cardsPage h1{font-size:32px}
+
+#fan{
+  position:relative;
+  width:min(350px,96vw);
+  height:min(390px,58vh);
+  perspective:1200px;
+  margin:8px auto;
 }
 
-.cardFront span {
-  font-size: 13px;
-  margin-top: 8px;
+.fanCard{
+  position:absolute;
+  width:78px;
+  height:130px;
+  left:50%;
+  top:50%;
+  transform-origin:center 155px;
+  transition:all .7s ease;
+  cursor:pointer;
 }
 
-.cardBack {
-  transform: rotateY(180deg);
-  background: #501038;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffe4a3;
-  font-size: 32px;
+.cardInner{
+  width:100%;
+  height:100%;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:transform .7s;
 }
 
-.cardBack img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
+.fanCard.flipped .cardInner{transform:rotateY(180deg)}
+
+.cardFront,.cardBack{
+  position:absolute;
+  inset:0;
+  border-radius:12px;
+  border:2px solid #f4d08c;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  box-shadow:0 0 12px #ffb6d5;
 }
 
-#cardsProgress {
-  font-size: 13px;
-  margin: 5px;
+.cardFront{
+  background:linear-gradient(145deg,#fff3f8,#ffb6d5);
+  color:#8b174e;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  font-size:27px;
+  font-weight:bold;
 }
 
-#royalForever {
-  display: none;
-  font-size: clamp(24px,6vw,38px);
-  color: #ffe4a3;
-  animation: glow 1.5s infinite alternate;
+.cardFront span{font-size:12px;margin-top:8px}
+
+.cardBack{
+  transform:rotateY(180deg);
+  background:#501038;
 }
 
-/* FULLSCREEN PHOTO */
-
-.photoOverlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 800;
-  align-items: center;
-  justify-content: center;
-  background: rgba(15,0,15,.96);
-  padding: 15px;
+.cardBack img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:10px;
 }
 
-.photoOverlay img {
-  max-width: 95%;
-  max-height: 82vh;
-  object-fit: contain;
-  border: 4px solid #ffd7a0;
-  border-radius: 15px;
-  box-shadow: 0 0 35px #ff69b4;
+#cardsProgress{font-size:13px;margin:5px}
+
+#royalForever{
+  display:none;
+  font-size:clamp(24px,6vw,38px);
+  color:#ffe4a3;
+  animation:glow 1.5s infinite alternate;
 }
 
-/* LETTER */
+/* PHOTO OVERLAY */
 
-.letterCover {
-  width: min(340px,90vw);
-  height: min(490px,85vh);
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  background: linear-gradient(145deg,#a92d60,#5b153e);
-  border: 4px solid #f5d18b;
-  border-radius: 15px;
-  box-shadow: 0 0 30px #ff69b4;
-  overflow: hidden;
+.photoOverlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:1200;
+  align-items:center;
+  justify-content:center;
+  background:rgba(15,0,15,.96);
+  padding:15px;
 }
 
-.coverTitle {
-  font-size: 22px;
-  color: #ffe4a3;
-  margin-bottom: 30px;
+.photoOverlay img{
+  max-width:95%;
+  max-height:82vh;
+  object-fit:contain;
+  border:4px solid #ffd7a0;
+  border-radius:15px;
+  box-shadow:0 0 35px #ff69b4;
 }
 
-#letterHeart {
-  font-size: 90px;
-  cursor: pointer;
-  animation: heartBeat .8s infinite alternate;
-  filter: drop-shadow(0 0 15px #ffb6d5);
-  user-select: none;
+/* LETTER GATE */
+
+.letterCover{
+  width:min(350px,92vw);
+  height:min(510px,88vh);
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  background:linear-gradient(145deg,#a92d60,#5b153e);
+  border:4px solid #f5d18b;
+  border-radius:15px;
+  box-shadow:0 0 30px #ff69b4;
+  overflow:hidden;
 }
 
-.letterDecor {
-  font-size: 20px;
-  margin: 12px;
+.coverTitle{
+  font-size:21px;
+  color:#ffe4a3;
+  margin-bottom:18px;
 }
 
-.letterCard {
-  display: none;
-  position: absolute;
-  z-index: 10;
-  width: 92%;
-  height: 94%;
-  padding: 18px 14px;
-  border-radius: 12px;
-  border: 3px solid #e8bd71;
-  color: #76224f;
-  background: linear-gradient(135deg,#fffaf2,#ffe1ee);
-  box-shadow: 0 0 25px white;
-  overflow-y: auto;
-  text-align: center;
-  animation: letterOut .8s ease;
+#lovePrompt{
+  font-size:28px;
+  color:#ffe4a3;
+  font-weight:bold;
+  padding:15px;
+  text-shadow:0 0 15px #ff69b4;
 }
 
-.letterCard.open {
-  display: block;
+#loveInput{
+  width:85%;
+  padding:13px;
+  border:2px solid #ff80b5;
+  border-radius:15px;
+  color:#741c4b;
+  text-align:center;
+  background:#fff6fa;
+  font-size:18px;
 }
 
-@keyframes letterOut {
-  from { transform: translateY(100%) scale(.7); opacity: 0; }
-  to { transform: translateY(0) scale(1); opacity: 1; }
+#loveResult{min-height:40px;font-size:30px;margin-top:12px}
+
+.letterCard{
+  display:none;
+  position:absolute;
+  z-index:10;
+  width:92%;
+  height:94%;
+  padding:18px 14px;
+  border-radius:12px;
+  border:3px solid #e8bd71;
+  color:#76224f;
+  background:linear-gradient(135deg,#fffaf2,#ffe1ee);
+  box-shadow:0 0 25px white;
+  overflow-y:auto;
+  text-align:center;
 }
 
-.letterCard h2 {
-  font-size: 22px;
-  margin: 12px 0;
-  color: #b21e65;
+.letterCard.open{
+  display:block;
+  animation:letterOut .8s ease;
 }
 
-.letterText {
-  font-size: 15px;
-  line-height: 1.65;
-  white-space: pre-line;
-  padding-bottom: 15px;
+@keyframes letterOut{
+  from{transform:translateY(100%) scale(.7);opacity:0}
+  to{transform:translateY(0) scale(1);opacity:1}
+}
+
+.letterCard h2{
+  font-family:cursive;
+  font-size:23px;
+  margin:12px 0;
+  color:#b21e65;
+}
+
+.letterText{
+  font-family:"Trebuchet MS",sans-serif;
+  font-size:15px;
+  line-height:1.7;
+  white-space:pre-line;
+  padding-bottom:15px;
 }
 
 /* GIFT */
 
-.giftBox {
-  font-size: 120px;
-  cursor: pointer;
-  filter: drop-shadow(0 0 22px #ffb6d5);
-  animation: bounce 1.8s infinite;
+.giftBox{
+  font-size:115px;
+  cursor:pointer;
+  filter:drop-shadow(0 0 22px #ffb6d5);
+  animation:bounce 1.8s infinite;
 }
 
-#musicArea {
-  display: none;
-  margin-top: 15px;
+@keyframes bounce{50%{transform:translateY(-10px)}}
+
+#musicArea{display:none;margin-top:15px}
+
+.musicNotes{
+  font-size:38px;
+  letter-spacing:8px;
+  animation:notes 1s infinite alternate;
 }
 
-.musicNotes {
-  font-size: 38px;
-  letter-spacing: 8px;
-  animation: notes 1s infinite alternate;
+@keyframes notes{to{transform:translateY(-8px) rotate(5deg)}}
+
+/* SECRET PHOTO */
+
+.secretBox{
+  width:min(340px,92vw);
+  padding:20px;
+  border:2px solid pink;
+  border-radius:22px;
+  background:rgba(60,0,40,.88);
 }
 
-@keyframes notes {
-  to { transform: translateY(-10px) rotate(5deg); }
+.secretBox input{
+  width:100%;
+  padding:13px;
+  border-radius:12px;
+  border:2px solid pink;
+  text-align:center;
+  letter-spacing:7px;
+  margin-top:15px;
+  font-size:20px;
 }
 
-/* SECRET */
-
-.secretBox {
-  width: min(340px,92vw);
-  padding: 20px;
-  border: 2px solid pink;
-  border-radius: 22px;
-  background: rgba(60,0,40,.82);
+#secretPhoto{
+  display:none;
+  width:min(300px,85vw);
+  max-height:48vh;
+  object-fit:contain;
+  border:3px solid #ffd7a0;
+  border-radius:15px;
+  margin-top:12px;
 }
 
-.secretBox input {
-  width: 100%;
-  padding: 13px;
-  border-radius: 12px;
-  border: 2px solid pink;
-  text-align: center;
-  letter-spacing: 7px;
-  margin-top: 15px;
-  font-size: 20px;
-}
-
-#secretPhoto {
-  display: none;
-  width: min(300px,85vw);
-  max-height: 48vh;
-  object-fit: contain;
-  border: 3px solid #ffd7a0;
-  border-radius: 15px;
-  margin-top: 12px;
+#scratchCanvas{
+  display:none;
+  width:min(300px,85vw);
+  height:250px;
+  border-radius:15px;
+  touch-action:none;
+  margin-top:12px;
 }
 
 /* FINAL */
 
-.finalText {
-  width: min(540px,95%);
-  font-size: clamp(17px,4.5vw,21px);
-  line-height: 1.8;
-  white-space: pre-line;
-  color: #fff1f8;
-  text-shadow: 0 0 10px #ff4f9a;
+.finalText{
+  width:min(540px,95%);
+  max-height:80vh;
+  overflow:auto;
+  font-size:clamp(17px,4.5vw,21px);
+  line-height:1.8;
+  white-space:pre-line;
+  color:#fff1f8;
+  text-shadow:0 0 10px #ff4f9a;
 }
 
-@media (max-height:700px) {
-  .fanCard {
-    width: 72px;
-    height: 115px;
-  }
-
-  #fan {
-    height: 330px;
-  }
-
-  #cake {
-    font-size: 85px;
-  }
+@media(max-height:700px){
+  #fan{height:320px}
+  .fanCard{width:65px;height:110px}
+  #cake{font-size:100px}
+  .letterCover{height:85vh}
 }
 </style>
 </head>
@@ -484,53 +540,46 @@ h1 {
 <audio id="bgm" src="bgm.mp3" loop preload="auto"></audio>
 <audio id="favoriteSong" src="favorite.mp3" preload="auto"></audio>
 
-<!-- 1. OPENING -->
-
+<!-- OPENING -->
 <section class="page active" id="opening">
   <div id="openingText">This is for you fraud 💕💞</div>
 </section>
 
-<!-- 2. PIN -->
-
+<!-- MAIN PIN -->
 <section class="page" id="pinPage">
   <div class="pinBox">
     <h2>🔐 Enter PIN ❤️</h2>
-
     <form id="mainPinForm">
-      <input id="mainPin" type="password"
-        inputmode="numeric" maxlength="4"
-        placeholder="••••" autocomplete="off">
-
+      <input id="mainPin" type="password" inputmode="numeric"
+        maxlength="4" placeholder="••••" autocomplete="off">
       <button class="btn" type="submit">Unlock ❤️</button>
     </form>
-
-    <div id="pinMessage"></div>
+    <div id="pinMessage" class="pinMessage"></div>
   </div>
 </section>
 
-<div id="arrowScene">
-  <div class="arrowHeart">
-    ❤️ <span class="arrow">💘</span>
-  </div>
-</div>
+<div id="heartScene">💘🥰</div>
+<div id="brokenScene">💔</div>
 
-<!-- 3. BIRTHDAY -->
-
+<!-- BIRTHDAY -->
 <section class="page" id="birthdayPage">
   <h1 id="birthdayTitle">Happy Birthday Chlm ❤️</h1>
-  <div id="cake">🎂</div>
-  <p>Make a beautiful wish! ✨</p>
+  <div class="cakeStage" id="cakeStage">
+    <div id="cake">🎂</div>
+    <div class="cakePiece left">🍰</div>
+    <div class="cakePiece right">🍰</div>
+  </div>
 </section>
 
-<!-- 4. ROYAL LOVE -->
+<div id="birthdayEffects">
+  <div id="birthdayBanner">🎈 Happy Birthday Chellam ❤️ 🎈</div>
+</div>
 
+<!-- ROYAL LOVE -->
 <section class="page" id="cardsPage">
-  <h1>Royal Love</h1>
-
+  <h1>Royal Love ❤️👑</h1>
   <div id="fan"></div>
-
-  <div id="cardsProgress">👑 ♛ ♥ ♛ 👑</div>
-
+  <div id="cardsProgress">18 King Cards 👑</div>
   <div id="royalForever">
     Royal Love Forever ♾️❤️
     <br>
@@ -538,78 +587,58 @@ h1 {
   </div>
 </section>
 
-<!-- FULLSCREEN CARD PHOTO -->
-
 <div class="photoOverlay" id="photoOverlay">
   <img id="photoView" src="" alt="Memory">
 </div>
 
-<!-- 5. LETTER -->
-
+<!-- LETTER -->
 <section class="page" id="letterPage">
   <div class="letterCover">
-
     <div class="coverTitle">💌 A Little Piece of My Heart 💌</div>
-
-    <div id="letterHeart">❤️</div>
-
-    <div class="letterDecor">🌹 🦋 ✨ 💕 🦋 🌹</div>
+    <div id="lovePrompt">Love You ❤️</div>
+    <input id="loveInput" type="text" placeholder="Love You Too 💕"
+      autocomplete="off" autocapitalize="off" spellcheck="false">
+    <div id="loveResult"></div>
 
     <div class="letterCard" id="letterCard">
-      <div class="letterDecor">🌹 💖 🦋 ✨ 🌹</div>
-
+      <div>🌹 💖 🦋 ✨ 🌹</div>
       <h2>Happy Birthday, My Chlm! ❤️🎂</h2>
-
       <div class="letterText" id="letterText"></div>
-
-      <div class="letterDecor">🌹 💕 🦋 💖 ✨ 🌹</div>
-
+      <div>🌹 💕 🦋 💖 ✨ 🌹</div>
       <button class="btn" id="toGift">🎁</button>
     </div>
   </div>
 </section>
 
-<!-- 6. GIFT -->
-
+<!-- GIFT -->
 <section class="page" id="giftPage">
   <h1 class="glow">A Special Gift for You ❤️</h1>
-
   <div class="giftBox" id="giftBox">🎁</div>
-
   <div id="musicArea">
     <div class="musicNotes">🎵 🎶 🎵</div>
     <p style="margin:15px">A song just for you ❤️</p>
-
     <button class="btn" id="playFavorite">▶ Play Song 🎶</button>
-
-    <p id="songStatus" class="small"></p>
-
+    <p id="songStatus" style="font-size:13px;margin-top:10px"></p>
     <button class="btn" id="toSecret">❤️</button>
   </div>
 </section>
 
-<!-- 7. SECRET -->
-
+<!-- SECRET PIN -->
 <section class="page" id="secretPage">
   <div class="secretBox">
     <h1>🔒 Our Little Secret ❤️</h1>
-
     <form id="secretPinForm">
-      <input id="secretPin" type="password"
-        inputmode="numeric" maxlength="4"
-        placeholder="••••" autocomplete="off">
-
+      <input id="secretPin" type="password" inputmode="numeric"
+        maxlength="4" placeholder="••••" autocomplete="off">
       <button class="btn" type="submit">💖</button>
     </form>
-
-    <p id="secretMessage" class="small"></p>
-
+    <p id="secretMessage" style="font-size:14px;margin-top:10px"></p>
     <img id="secretPhoto" src="" alt="Secret photo">
+    <canvas id="scratchCanvas"></canvas>
   </div>
 </section>
 
-<!-- 8. FINAL -->
-
+<!-- FINAL -->
 <section class="page" id="finalPage">
   <div class="finalText">Thank You for Coming Into My Life, Chlm! ❤️🥹🫂
 
@@ -620,7 +649,6 @@ I’m so lucky to have you in my life. Keep smiling, stay happy, and always be t
 Love You Forever, Chlm! 🫂❤️♾️
 
 🎂 Happy Birthday Da! ❤️🥹💋</div>
-
   <button class="btn" id="replayButton">Replay ❤️</button>
 </section>
 
@@ -628,222 +656,291 @@ Love You Forever, Chlm! 🫂❤️♾️
 const $ = id => document.getElementById(id);
 
 const pageIds = [
-  "opening", "pinPage", "birthdayPage", "cardsPage",
-  "letterPage", "giftPage", "secretPage", "finalPage"
+  "opening","pinPage","birthdayPage","cardsPage",
+  "letterPage","giftPage","secretPage","finalPage"
 ];
 
-function showPage(id) {
+function showPage(id){
   pageIds.forEach(p => $(p).classList.remove("active"));
   $(id).classList.add("active");
 }
 
-function startBgm() {
-  $("bgm").volume = 0.35;
-  $("bgm").play().catch(() => {});
+function startBgm(){
+  const bgm = $("bgm");
+  bgm.volume = 0.35;
+  bgm.play().catch(() => {});
 }
 
-function resumeBgm() {
-  if ($("favoriteSong").paused) startBgm();
+function createFloat(){
+  const items = ["❤️","💕","💖","✨","🦋","🌹","💗"];
+  const el = document.createElement("div");
+  el.className = "floating";
+  el.textContent = items[Math.floor(Math.random()*items.length)];
+  el.style.left = Math.random()*100 + "vw";
+  el.style.fontSize = (15 + Math.random()*18) + "px";
+  el.style.animationDuration = (4 + Math.random()*3) + "s";
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(),8000);
 }
 
-function onDoubleTap(element, callback) {
+const floatTimer = setInterval(createFloat,850);
+
+/* DOUBLE TOUCH */
+
+function onDoubleTap(element,callback){
   let lastTap = 0;
-
-  element.addEventListener("click", event => {
+  element.addEventListener("click",event => {
     const now = Date.now();
-
-    if (now - lastTap < 450) {
+    if(now-lastTap < 450){
       lastTap = 0;
       callback(event);
-    } else {
+    }else{
       lastTap = now;
     }
   });
 }
 
-/* FLOATING EFFECTS */
-
-function createFloat() {
-  const items = ["❤️","💕","💖","✨","🦋","🌹","💗"];
-  const item = document.createElement("div");
-
-  item.className = "floating";
-  item.textContent = items[Math.floor(Math.random() * items.length)];
-  item.style.left = Math.random() * 100 + "vw";
-  item.style.fontSize = (15 + Math.random() * 22) + "px";
-  item.style.animationDuration = (4 + Math.random() * 4) + "s";
-
-  document.body.appendChild(item);
-  setTimeout(() => item.remove(), 8500);
-}
-
-setInterval(createFloat, 700);
-
-/* OPENING */
-
-onDoubleTap($("openingText"), () => {
+onDoubleTap($("openingText"),() => {
   startBgm();
   showPage("pinPage");
 });
 
 /* MAIN PIN */
 
-$("mainPinForm").addEventListener("submit", event => {
+$("mainPinForm").addEventListener("submit",event => {
   event.preventDefault();
 
-  if ($("mainPin").value === "1008") {
+  if($("mainPin").value === "1008"){
     $("pinMessage").textContent = "";
-    $("arrowScene").style.display = "flex";
+    $("heartScene").classList.add("show");
 
     setTimeout(() => {
-      $("arrowScene").style.display = "none";
+      $("heartScene").classList.remove("show");
       $("mainPin").value = "";
       showPage("birthdayPage");
-    }, 1500);
+    },1100);
 
-  } else {
-    $("pinMessage").textContent = "💔";
+  }else{
     $("mainPin").value = "";
+    $("brokenScene").classList.add("show");
+
+    setTimeout(() => {
+      $("brokenScene").classList.remove("show");
+      $("pinMessage").textContent = "";
+    },1000);
   }
 });
 
-/* CAKE */
+/* CAKE CUT AND BIRTHDAY EFFECTS */
 
-$("cake").addEventListener("click", () => {
-  showPage("cardsPage");
+let cakeStarted = false;
+
+$("cake").addEventListener("click",() => {
+  if(cakeStarted) return;
+  cakeStarted = true;
+
+  $("cakeStage").classList.add("cut");
+
+  setTimeout(() => {
+    showBirthdayEffects();
+  },900);
 });
 
-/* ROYAL LOVE CARD FAN */
+function showBirthdayEffects(){
+  $("birthdayEffects").style.display = "block";
+  $("birthdayBanner").classList.add("fly");
+
+  const balloonTypes = ["🎈","🎈","🎈","🎈","🎈","🎈"];
+
+  balloonTypes.forEach((b,i) => {
+    setTimeout(() => {
+      const el = document.createElement("div");
+      el.className = "balloon";
+      el.textContent = b;
+      el.style.left = (5 + Math.random()*90) + "%";
+      el.style.animationDuration = (3 + Math.random()*2) + "s";
+      $("birthdayEffects").appendChild(el);
+      setTimeout(() => el.remove(),6000);
+    },i*180);
+  });
+
+  setTimeout(() => {
+    for(let i=0;i<18;i++){
+      setTimeout(() => {
+        const f = document.createElement("div");
+        f.className = "firework";
+        f.textContent = ["🎆","✨","🎇","💖"][i%4];
+        f.style.left = (5 + Math.random()*85) + "vw";
+        f.style.top = (8 + Math.random()*65) + "vh";
+        document.body.appendChild(f);
+        setTimeout(() => f.remove(),1400);
+      },i*150);
+    }
+  },2200);
+
+  setTimeout(() => {
+    $("birthdayEffects").style.display = "none";
+    $("birthdayBanner").classList.remove("fly");
+    $("birthdayEffects").querySelectorAll(".balloon").forEach(el => el.remove());
+    showPage("cardsPage");
+    arrangeFan();
+  },6500);
+}
+
+/* 18 KING PHOTO CARDS */
 
 const fan = $("fan");
 const cardCount = 18;
-
 let cardOrder = [];
 let isAnimating = false;
-let currentPhotoTimer = null;
+let cardsSeen = new Set();
+let photoTimer = null;
 
-for (let i = 1; i <= cardCount; i++) {
-  cardOrder.push(i);
+function createCards(){
+  fan.innerHTML = "";
+  cardOrder = [];
+  cardsSeen.clear();
 
-  const card = document.createElement("div");
-  card.className = "fanCard";
-  card.dataset.id = i;
+  for(let i=1;i<=cardCount;i++){
+    cardOrder.push(i);
 
-  const inner = document.createElement("div");
-  inner.className = "cardInner";
+    const card = document.createElement("div");
+    card.className = "fanCard";
+    card.dataset.id = i;
 
-  const front = document.createElement("div");
-  front.className = "cardFront";
+    const inner = document.createElement("div");
+    inner.className = "cardInner";
 
-  const isKing = i % 2 === 1;
+    const front = document.createElement("div");
+    front.className = "cardFront";
+    front.innerHTML = "👑<span>KING</span>";
 
-  front.innerHTML = isKing
-    ? "♛<span>KING</span>"
-    : "♡<span>QUEEN</span>";
+    const back = document.createElement("div");
+    back.className = "cardBack";
 
-  const back = document.createElement("div");
-  back.className = "cardBack";
+    const img = document.createElement("img");
+    img.src = `photo${i}.jpg`;
+    img.alt = `Memory ${i}`;
 
-  const img = document.createElement("img");
-  img.src = `photo${i}.jpg`;
-  img.alt = `Memory ${i}`;
+    back.appendChild(img);
+    inner.append(front,back);
+    card.appendChild(inner);
+    card.addEventListener("click",() => selectCard(i));
+    fan.appendChild(card);
+  }
 
-  back.appendChild(img);
-  inner.append(front, back);
-  card.appendChild(inner);
-
-  card.addEventListener("click", () => selectCard(i));
-
-  fan.appendChild(card);
+  arrangeFan();
+  $("cardsProgress").textContent = "18 King Cards 👑";
+  $("royalForever").style.display = "none";
 }
 
-function arrangeFan() {
+function arrangeFan(){
   const cards = [...fan.children];
   const total = cards.length;
 
-  cards.forEach((card, position) => {
-    const angle = (position - (total - 1) / 2) * 5.3;
-
-    card.style.zIndex = position + 1;
+  cards.forEach((card,pos) => {
+    const angle = (pos-(total-1)/2)*5.3;
+    card.style.zIndex = pos+1;
     card.style.left = "50%";
     card.style.top = "50%";
-
     card.style.transform =
-      `translate(-50%,-50%) rotate(${angle}deg) translateY(-100px)`;
+      `translate(-50%,-50%) rotate(${angle}deg) translateY(-85px)`;
   });
 }
 
-arrangeFan();
-
-function selectCard(id) {
-  if (isAnimating) return;
-
-  isAnimating = true;
+function selectCard(id){
+  if(isAnimating) return;
 
   const card = fan.querySelector(`[data-id="${id}"]`);
+  if(!card) return;
 
-  if (!card) {
-    isAnimating = false;
-    return;
-  }
-
-  // Pull the selected card out from the fan.
+  isAnimating = true;
   card.style.zIndex = "100";
-  card.style.left = "50%";
-  card.style.top = "45%";
-  card.style.transform = "translate(-50%,-50%) rotate(0deg) scale(1.25)";
+  card.style.transform =
+    "translate(-50%,-50%) rotate(0deg) translateY(-15px) scale(1.2)";
 
   setTimeout(() => {
-    // Flip the card to reveal its own photo.
     card.classList.add("flipped");
 
     $("photoView").src = `photo${id}.jpg`;
     $("photoOverlay").style.display = "flex";
 
-    currentPhotoTimer = setTimeout(() => {
+    photoTimer = setTimeout(() => {
       $("photoOverlay").style.display = "none";
       $("photoView").src = "";
-
-      // Flip back and roll away.
       card.classList.remove("flipped");
 
-      card.style.transform =
-        "translate(180px,-160px) rotate(720deg) scale(.6)";
+      // Selected card moves to the back.
+      card.remove();
+      fan.appendChild(card);
 
-      setTimeout(() => {
-        // Move this card to the end of the fan.
-        card.remove();
-        fan.appendChild(card);
+      cardsSeen.add(id);
+      cardOrder = [...fan.children].map(c => Number(c.dataset.id));
 
-        cardOrder = cardOrder.filter(n => n !== id);
-        cardOrder.push(id);
+      arrangeFan();
 
-        arrangeFan();
+      $("cardsProgress").textContent =
+        `${cardsSeen.size} / 18 Royal Love memories ❤️`;
 
-        $("cardsProgress").textContent =
-          `${cardOrder.length} Royal Love cards ❤️`;
+      if(cardsSeen.size === 18){
+        $("royalForever").style.display = "block";
+      }
 
-        // All cards have had a turn.
-        if (cardOrder.every((number, index) => number === index + 1)) {
-          $("royalForever").style.display = "block";
-        }
+      isAnimating = false;
+    },2000);
 
-        isAnimating = false;
-      }, 750);
-
-    }, 2000);
-
-  }, 450);
+  },400);
 }
 
-$("toLetter").addEventListener("click", () => {
+createCards();
+
+$("toLetter").addEventListener("click",() => {
   showPage("letterPage");
+  $("loveInput").value = "";
+  $("loveResult").textContent = "";
+  $("loveInput").disabled = false;
 });
 
-/* LETTER COVER */
+/* LOVE YOU TOO GATE */
 
-const letterContent =
-`Even though we're far apart, you’re always close to my heart. Sometimes, I wish I could be there with you, see your smile, hold your hand, and make your birthday extra special. 🫂💗
+let loveTimer = null;
+
+$("loveInput").addEventListener("input",() => {
+  clearTimeout(loveTimer);
+
+  const value = $("loveInput").value.trim().toLowerCase();
+
+  if(value === "love you too"){
+    $("loveResult").textContent = "💖";
+    $("loveInput").disabled = true;
+
+    setTimeout(() => {
+      $("letterCard").classList.add("open");
+      typeLetter();
+    },450);
+
+    return;
+  }
+
+  if(value.length > 0){
+    loveTimer = setTimeout(() => {
+      if($("loveInput").value.trim().toLowerCase() !== "love you too"){
+        $("loveResult").textContent = "😒";
+        $("loveInput").value = "";
+
+        setTimeout(() => {
+          $("loveResult").textContent = "";
+        },850);
+      }
+    },1100);
+  }else{
+    $("loveResult").textContent = "";
+  }
+});
+
+/* BIRTHDAY LETTER */
+
+const letterContent = `Even though we're far apart, you’re always close to my heart. Sometimes, I wish I could be there with you, see your smile, hold your hand, and make your birthday extra special. 🫂💗
 
 I LOVE YOU, CHLM! ❤️🫶🏻
 I MISS YOU MORE THAN WORDS CAN SAY! 🥺❤️‍🩹
@@ -858,127 +955,120 @@ MISS YOU, AND I'M WAITING TO SEE YOU SOON! 🥹💗♾️
 
 Happy Birthday once again, my special person! 🎂💋❤️`;
 
-let letterOpen = false;
 let letterTypingTimer = null;
 
-function typeLetter() {
+function typeLetter(){
   clearInterval(letterTypingTimer);
-
   $("letterText").textContent = "";
   let i = 0;
 
   letterTypingTimer = setInterval(() => {
-    if (i >= letterContent.length) {
+    if(i >= letterContent.length){
       clearInterval(letterTypingTimer);
       return;
     }
 
     $("letterText").textContent += letterContent[i++];
     $("letterCard").scrollTop = $("letterCard").scrollHeight;
-  }, 20);
+  },18);
 }
-
-onDoubleTap($("letterHeart"), () => {
-  letterOpen = !letterOpen;
-
-  if (letterOpen) {
-    $("letterCard").classList.add("open");
-    typeLetter();
-  } else {
-    clearInterval(letterTypingTimer);
-    $("letterCard").classList.remove("open");
-  }
-});
-
-$("toGift").addEventListener("click", () => {
-  clearInterval(letterTypingTimer);
-  letterOpen = false;
-  $("letterCard").classList.remove("open");
-  showPage("giftPage");
-});
 
 /* GIFT */
 
-$("giftBox").addEventListener("click", () => {
+$("toGift").addEventListener("click",() => {
+  clearInterval(letterTypingTimer);
+  showPage("giftPage");
+});
+
+$("giftBox").addEventListener("click",() => {
   $("musicArea").style.display = "block";
 
-  for (let i = 0; i < 12; i++) {
-    setTimeout(createFloat, i * 100);
+  for(let i=0;i<12;i++){
+    setTimeout(createFloat,i*100);
   }
 });
 
 /* FAVORITE SONG */
 
-$("playFavorite").addEventListener("click", async () => {
+$("playFavorite").addEventListener("click",async() => {
   const song = $("favoriteSong");
+  const bgm = $("bgm");
 
-  if (!song.paused) {
+  if(!song.paused){
     song.pause();
     $("playFavorite").textContent = "▶ Play Song 🎶";
     $("songStatus").textContent = "Song paused ❤️";
-    resumeBgm();
+    bgm.play().catch(() => {});
     return;
   }
 
-  $("bgm").pause();
+  bgm.pause();
 
-  try {
+  try{
     await song.play();
-
     $("playFavorite").textContent = "⏸ Pause Song 🎶";
     $("songStatus").textContent = "🎵 Playing for you ❤️";
-
-  } catch (error) {
+  }catch(error){
     $("songStatus").textContent =
-      "favorite.mp3 file-ஐ சரிபார் da ❤️";
-    resumeBgm();
+      "favorite.mp3 file-ஐ சரிபார் ❤️";
+    bgm.play().catch(() => {});
   }
 });
 
-$("favoriteSong").addEventListener("ended", () => {
+$("favoriteSong").addEventListener("ended",() => {
   $("playFavorite").textContent = "▶ Play Song 🎶";
   $("songStatus").textContent = "💕 With love, Chlm!";
-  resumeBgm();
+  $("bgm").play().catch(() => {});
 });
 
-$("toSecret").addEventListener("click", () => {
+$("toSecret").addEventListener("click",() => {
   $("favoriteSong").pause();
-  resumeBgm();
+  $("bgm").play().catch(() => {});
   showPage("secretPage");
 });
 
-/* SECRET PIN */
+/* SECRET PIN AND TWO PHOTOS */
 
-$("secretPinForm").addEventListener("submit", event => {
+let secretTimer1 = null;
+let secretTimer2 = null;
+
+$("secretPinForm").addEventListener("submit",event => {
   event.preventDefault();
 
-  if ($("secretPin").value === "2731") {
-    $("secretMessage").textContent = "❤️💖❤️";
-    $("secretPhoto").src = "secret1.jpg";
-    $("secretPhoto").style.display = "block";
-    $("secretPinForm").style.display = "none";
-
-    setTimeout(() => {
-      $("secretPhoto").src = "secret2.jpg";
-
-      setTimeout(() => {
-        $("secretPhoto").style.display = "none";
-        showPage("finalPage");
-      }, 10000);
-
-    }, 10000);
-
-  } else {
+  if($("secretPin").value !== "2731"){
     $("secretMessage").textContent = "💔";
     $("secretPin").value = "";
+    return;
   }
+
+  $("secretPinForm").style.display = "none";
+  $("secretMessage").textContent = "❤️🥹❤️";
+
+  // First secret photo
+  $("secretPhoto").src = "secret1.jpg";
+  $("secretPhoto").style.display = "block";
+
+  secretTimer1 = setTimeout(() => {
+    // Second secret photo
+    $("secretPhoto").src = "secret2.jpg";
+
+    secretTimer2 = setTimeout(() => {
+      $("secretPhoto").style.display = "none";
+      showPage("finalPage");
+    },7000);
+
+  },5000);
 });
 
 /* REPLAY */
 
-$("replayButton").addEventListener("click", () => {
+$("replayButton").addEventListener("click",() => {
   clearInterval(letterTypingTimer);
-  clearTimeout(currentPhotoTimer);
+  clearInterval(floatTimer);
+  clearTimeout(photoTimer);
+  clearTimeout(secretTimer1);
+  clearTimeout(secretTimer2);
+  clearTimeout(loveTimer);
 
   $("favoriteSong").pause();
   $("favoriteSong").currentTime = 0;
@@ -986,22 +1076,15 @@ $("replayButton").addEventListener("click", () => {
   $("bgm").pause();
   $("bgm").currentTime = 0;
 
-  // Restore the original card order.
-  cardOrder = Array.from({length: cardCount}, (_, i) => i + 1);
+  $("cakeStage").classList.remove("cut");
+  $("cake").style.opacity = "1";
+  $("cakeStarted");
 
-  [...fan.children]
-    .sort((a, b) => Number(a.dataset.id) - Number(b.dataset.id))
-    .forEach(card => {
-      card.classList.remove("flipped");
-      fan.appendChild(card);
-    });
+  $("birthdayEffects").style.display = "none";
+  $("birthdayBanner").classList.remove("fly");
 
-  arrangeFan();
-
-  isAnimating = false;
-
-  $("royalForever").style.display = "none";
-  $("cardsProgress").textContent = "👑 ♛ ♥ ♛ 👑";
+  $("heartScene").classList.remove("show");
+  $("brokenScene").classList.remove("show");
 
   $("mainPin").value = "";
   $("secretPin").value = "";
@@ -1010,15 +1093,21 @@ $("replayButton").addEventListener("click", () => {
   $("secretMessage").textContent = "";
 
   $("musicArea").style.display = "none";
+  $("playFavorite").textContent = "▶ Play Song 🎶";
+  $("songStatus").textContent = "";
+
   $("letterText").textContent = "";
   $("letterCard").classList.remove("open");
-  letterOpen = false;
+
+  $("loveInput").value = "";
+  $("loveInput").disabled = false;
+  $("loveResult").textContent = "";
 
   $("secretPhoto").style.display = "none";
   $("secretPinForm").style.display = "block";
 
-  $("playFavorite").textContent = "▶ Play Song 🎶";
-  $("songStatus").textContent = "";
+  createCards();
+  cakeStarted = false;
 
   showPage("opening");
 });
