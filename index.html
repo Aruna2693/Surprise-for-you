@@ -13,15 +13,18 @@
 :root {
     --gold: #ffd76a;
     --pink: #ff5b9b;
-    --dark: #170719;
 }
 
-body {
+html, body {
     margin: 0;
+    min-height: 100%;
     font-family: Georgia, "Times New Roman", serif;
     background: #170719;
     color: white;
     text-align: center;
+}
+
+body {
     overflow-x: hidden;
 }
 
@@ -29,6 +32,7 @@ body {
     display: none;
     position: relative;
     min-height: 100vh;
+    min-height: 100dvh;
     width: 100%;
     padding: 24px 14px;
     overflow: hidden;
@@ -48,10 +52,6 @@ body {
 @keyframes pageIn {
     from { opacity: 0; transform: scale(.97); }
     to { opacity: 1; transform: scale(1); }
-}
-
-h1, h2, p {
-    overflow-wrap: anywhere;
 }
 
 h1 {
@@ -102,6 +102,7 @@ input {
 }
 
 /* PAGE 1 */
+
 #page1 {
     background:
         linear-gradient(#16061c55, #16061c99),
@@ -121,11 +122,18 @@ input {
 }
 
 @keyframes glow {
-    from { transform: scale(1); text-shadow: 0 0 10px #ff4caa; }
-    to { transform: scale(1.04); text-shadow: 0 0 28px #ff4caa; }
+    from {
+        transform: scale(1);
+        text-shadow: 0 0 10px #ff4caa;
+    }
+    to {
+        transform: scale(1.04);
+        text-shadow: 0 0 28px #ff4caa;
+    }
 }
 
-/* HEARTS */
+/* FLOATING HEARTS */
+
 .floating-heart {
     position: fixed;
     z-index: 20;
@@ -141,7 +149,8 @@ input {
     }
 }
 
-/* PAGE 2 */
+/* PAGE 2: PIN */
+
 .pin-title {
     font-size: clamp(25px, 6vw, 38px);
 }
@@ -169,7 +178,8 @@ input {
     100% { transform: scale(0); opacity: 0; }
 }
 
-/* PAGE 3: CAKE */
+/* PAGE 3: BIRTHDAY CAKE */
+
 .celebration-frame {
     width: min(520px, 96%);
     border: 3px solid var(--gold);
@@ -240,7 +250,7 @@ input {
     background: #ffdf55;
     transform: rotate(-45deg);
     box-shadow: 0 0 15px #ffdf55;
-    animation: flame 0.5s infinite alternate;
+    animation: flame .5s infinite alternate;
 }
 
 @keyframes flame {
@@ -277,7 +287,10 @@ input {
 }
 
 @keyframes confettiFall {
-    to { transform: translateY(500px) rotate(800deg); opacity: 0; }
+    to {
+        transform: translateY(500px) rotate(800deg);
+        opacity: 0;
+    }
 }
 
 .firework {
@@ -294,6 +307,7 @@ input {
 }
 
 /* PAGE 4: ROYAL LOVE */
+
 #page4 {
     justify-content: flex-start;
     padding-top: 22px;
@@ -334,12 +348,15 @@ input {
     justify-content: center;
     padding: 4px;
     cursor: pointer;
-    transition: transform .7s ease, left .7s ease, bottom .7s ease;
+    transition:
+        transform .7s ease,
+        left .7s ease,
+        bottom .7s ease,
+        opacity .3s ease;
     overflow: hidden;
 }
 
 .royal-card .card-back {
-    writing-mode: horizontal-tb;
     font-size: clamp(10px, 2.5vw, 15px);
     font-weight: bold;
     color: #ffe5a3;
@@ -348,25 +365,67 @@ input {
 .royal-card img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
+    background: #100811;
     border-radius: 9px;
     display: none;
 }
 
+/*
+   IMPORTANT CORRECTION:
+   Photo appears full-screen on mobile.
+   object-fit: contain shows the entire photo.
+   No cropping.
+*/
+
 .royal-card.revealing {
-    z-index: 100 !important;
-    left: 50%;
-    bottom: 45px;
-    transform: translateX(0) rotateY(0) scale(1.6) !important;
-    background: #fff;
+    position: fixed !important;
+    inset: 0 !important;
+
+    width: 100vw !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+
+    margin: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: 0 !important;
+    bottom: 0 !important;
+
+    padding: 12px !important;
+    border: 4px solid #ffd76a !important;
+    border-radius: 0 !important;
+
+    transform: none !important;
+    transform-origin: center !important;
+
+    background: #100811 !important;
+    box-shadow: 0 0 35px #ff5b9b !important;
+
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+
+    z-index: 99999 !important;
+    cursor: default;
 }
 
 .royal-card.revealing img {
-    display: block;
+    display: block !important;
+
+    width: 100% !important;
+    height: 100% !important;
+
+    max-width: 100% !important;
+    max-height: 100% !important;
+
+    object-fit: contain !important;
+    background: #100811;
+    border-radius: 5px;
 }
 
 .royal-card.revealing .card-back {
-    display: none;
+    display: none !important;
 }
 
 #royalMessage {
@@ -380,7 +439,8 @@ input {
     margin-top: 0;
 }
 
-/* PAGE 5: LETTER */
+/* PAGE 5: GREETING CARD */
+
 .letter-cover {
     width: min(440px, 95%);
     min-height: 270px;
@@ -393,7 +453,8 @@ input {
 
 .letter-inner {
     width: min(500px, 96%);
-    max-height: 65vh;
+    max-height: 72vh;
+    max-height: 72dvh;
     overflow-y: auto;
     padding: 22px 17px;
     color: #551d39;
@@ -441,6 +502,7 @@ input {
 }
 
 /* PAGE 6: GIFT */
+
 .gift {
     font-size: clamp(100px, 28vw, 155px);
     cursor: pointer;
@@ -470,11 +532,13 @@ input {
     to { transform: translateY(-12px) rotate(10deg); }
 }
 
-/* PAGE 7: SCRATCH */
+/* PAGE 7: SCRATCH CARDS */
+
 .scratch-wrap {
     position: relative;
     width: min(350px, 90vw);
-    height: 350px;
+    height: min(350px, 55vh);
+    height: min(350px, 55dvh);
     margin: 15px auto;
     border: 3px solid #ffd76a;
     border-radius: 20px;
@@ -506,7 +570,8 @@ input {
     font-size: 16px;
 }
 
-/* PAGE 8 */
+/* PAGE 8: FINAL */
+
 .final-message {
     font-size: clamp(25px, 6vw, 42px);
     line-height: 1.6;
@@ -520,9 +585,22 @@ input {
 }
 
 @media (max-width: 400px) {
-    .fan-stage { height: 270px; }
-    .royal-card { height: 135px; }
-    .letter-inner { max-height: 58vh; }
+    .fan-stage {
+        height: 270px;
+    }
+
+    .royal-card {
+        height: 135px;
+    }
+
+    .letter-inner {
+        max-height: 65vh;
+        max-height: 65dvh;
+    }
+
+    .royal-card.revealing {
+        padding: 8px !important;
+    }
 }
 </style>
 </head>
@@ -533,149 +611,253 @@ input {
 <audio id="favoriteMusic" src="favorite.mp3" preload="auto"></audio>
 
 <!-- PAGE 1: OPENING -->
+
 <section class="page active" id="page1">
     <div class="opening-text" id="openingText">
         This is for you fraud 💕💞
     </div>
 </section>
 
-<!-- PAGE 2: PIN -->
+<!-- PAGE 2: MAIN PIN -->
+
 <section class="page" id="page2">
     <h1 class="pin-title">A Little Surprise ❤️</h1>
+
     <p>Enter your secret PIN 💌</p>
+
     <div id="mainPinBox">
-        <input id="mainPin" type="password" inputmode="numeric"
-               maxlength="4" placeholder="Enter PIN">
+        <input
+            id="mainPin"
+            type="password"
+            inputmode="numeric"
+            maxlength="4"
+            placeholder="Enter PIN"
+        >
+
         <br>
+
         <button id="mainPinButton">Unlock ❤️</button>
     </div>
+
     <div id="pinMessage"></div>
 </section>
 
-<!-- PAGE 3: CAKE -->
+<!-- PAGE 3: CAKE CELEBRATION -->
+
 <section class="page" id="page3">
     <div class="celebration-frame" id="celebrationFrame">
+
         <div class="cake" id="birthdayCake" role="button"
              aria-label="Birthday cake">
+
             <div class="candle"><div class="flame"></div></div>
             <div class="candle"><div class="flame"></div></div>
             <div class="candle"><div class="flame"></div></div>
+
             <div class="cake-top"></div>
             <div class="cake-bottom"></div>
         </div>
-        <div id="birthdayBalloonText">🎈 Happy Birthday Chlm ❤️ 🎈</div>
+
+        <div id="birthdayBalloonText">
+            🎈 Happy Birthday Chlm ❤️ 🎈
+        </div>
+
     </div>
 </section>
 
 <!-- PAGE 4: ROYAL LOVE -->
+
 <section class="page" id="page4">
+
     <h1 class="royal-title">Royal Love ❤️👑</h1>
+
     <div class="royal-subtitle">18 Golden Moments ✨</div>
 
     <div class="fan-stage" id="fanStage"></div>
 
-    <div id="royalMessage">Touch the first King card 👑</div>
-    <button id="royalStart">Start Our Royal Love ❤️</button>
+    <div id="royalMessage">
+        Touch the first King card 👑
+    </div>
+
+    <button id="royalStart">
+        Start Our Royal Love ❤️
+    </button>
+
 </section>
 
-<!-- PAGE 5: GREETING CARD + LETTER -->
+<!-- PAGE 5: GREETING CARD + NEW LETTER -->
+
 <section class="page" id="page5">
+
     <div class="letter-cover" id="letterCover">
+
         <h1>💌 A Special Letter 💌</h1>
+
         <h2>Love You ❤️</h2>
+
         <p>A little surprise made with love 🌹</p>
 
-        <input id="letterCode" type="password"
-               placeholder="Enter your secret code">
+        <input
+            id="letterCode"
+            type="password"
+            placeholder="Enter your secret code"
+        >
+
         <br>
-        <button id="letterUnlock">Open My Card 💌</button>
+
+        <button id="letterUnlock">
+            Open My Card 💌
+        </button>
+
         <div id="wrongCodeEmoji" class="hidden">😡</div>
+
     </div>
 
     <div class="letter-inner hidden" id="letterInner">
-        <h2>Happy Birthday, Chlm ❤️</h2>
+
+        <h2>Happy Birthday, My Dear Chlm! ❤️🎂🥹</h2>
+
         <div class="rose">🌹</div>
+
         <div id="letterText"></div>
+
         <p style="text-align:center; font-size:26px;">
-            Forever Special ❤️🫂
+            Forever Special ❤️
         </p>
-        <button id="letterContinue">Continue ❤️</button>
+
+        <button id="letterContinue">
+            Continue ❤️
+        </button>
+
     </div>
+
 </section>
 
-<!-- PAGE 6: GIFT -->
+<!-- PAGE 6: GIFT + FAVOURITE SONG -->
+
 <section class="page" id="page6">
+
     <h1>A Little Gift for You 🎁</h1>
+
     <div class="gift" id="giftBox" role="button"
-         aria-label="Open gift">🎁</div>
+         aria-label="Open gift">
+        🎁
+    </div>
 
     <div class="song-card hidden" id="songCard">
+
         <h2>Your Favourite Song ❤️</h2>
+
         <div class="music-notes">🎶 🎵 🎶</div>
+
         <p>One song, a thousand memories 💕</p>
-        <p class="small-note">Your favourite song is playing 🎧</p>
-        <button id="songContinue">Continue 💖</button>
+
+        <p class="small-note">
+            Your favourite song is playing 🎧
+        </p>
+
+        <button id="songContinue">
+            Continue 💖
+        </button>
+
     </div>
+
 </section>
 
-<!-- PAGE 7: SECRET PIN + SCRATCH -->
+<!-- PAGE 7: SECRET PIN + SCRATCH CARDS -->
+
 <section class="page" id="page7">
+
     <h1>One Last Secret 🔐</h1>
+
     <div id="secretPinBox">
+
         <p>Enter the secret PIN ❤️</p>
-        <input id="secretPin" type="password"
-               inputmode="numeric" maxlength="4"
-               placeholder="Secret PIN">
+
+        <input
+            id="secretPin"
+            type="password"
+            inputmode="numeric"
+            maxlength="4"
+            placeholder="Secret PIN"
+        >
+
         <br>
-        <button id="secretPinButton">Unlock 🔐</button>
+
+        <button id="secretPinButton">
+            Unlock 🔐
+        </button>
+
         <p id="secretPinMessage"></p>
+
     </div>
 
     <div id="scratchArea" class="hidden">
-        <h2 id="scratchTitle">A Secret Memory ❤️</h2>
-        <p class="scratch-instruction">Scratch the card with your finger ✨</p>
+
+        <h2 id="scratchTitle">Secret Memory 1 ❤️</h2>
+
+        <p class="scratch-instruction">
+            Scratch the card with your finger ✨
+        </p>
 
         <div class="scratch-wrap" id="scratchWrap">
-            <img class="scratch-photo" id="scratchPhoto"
-                 src="secret1.jpg" alt="Secret memory">
+
+            <img
+                class="scratch-photo"
+                id="scratchPhoto"
+                src="secret1.jpg"
+                alt="Secret memory"
+            >
+
             <canvas id="scratchCanvas"></canvas>
+
         </div>
-        <p id="scratchStatus">Keep scratching to reveal the photo 💕</p>
+
+        <p id="scratchStatus">
+            Keep scratching to reveal the photo 💕
+        </p>
+
     </div>
+
 </section>
 
 <!-- PAGE 8: FINAL -->
+
 <section class="page" id="page8">
+
     <div class="final-message">
+
         Thank You for Coming Into My Life, Chlm! ❤️🥹🫂
+
         <br><br>
+
         Happy Birthday Da! ❤️🥹💋
+
     </div>
-    <button id="replayButton">Replay From Beginning 🔁❤️</button>
+
+    <button id="replayButton">
+        Replay From Beginning 🔁❤️
+    </button>
+
 </section>
 
 <script>
-/* ---------------------------
-   GENERAL HELPERS
---------------------------- */
 
-const pages = Array.from(document.querySelectorAll(".page"));
+/* GENERAL HELPERS */
+
+const pages = [...document.querySelectorAll(".page")];
+
 const bgMusic = document.getElementById("bgMusic");
 const favoriteMusic = document.getElementById("favoriteMusic");
 
 let currentPage = 1;
 let cakeTimer = null;
-let royalRunning = false;
+let royalStarted = false;
 let letterTimer = null;
-let scratchNumber = 1;
-let scratchCompleted = false;
-let scratchReady = false;
-let scratchRevealing = false;
-let lastScratchPoint = null;
-let roseInterval = null;
 
 function goToPage(number) {
     pages.forEach(page => page.classList.remove("active"));
+
     const target = document.getElementById("page" + number);
 
     if (target) {
@@ -687,24 +869,33 @@ function goToPage(number) {
 
 function tryStartBackgroundMusic() {
     bgMusic.volume = 0.35;
-    const playPromise = bgMusic.play();
 
-    if (playPromise && typeof playPromise.catch === "function") {
-        playPromise.catch(() => {
-            // Browsers may block autoplay until the visitor interacts.
-        });
+    const result = bgMusic.play();
+
+    if (result && result.catch) {
+        result.catch(() => {});
     }
 }
 
 function showHearts() {
     const heart = document.createElement("div");
+
     heart.className = "floating-heart";
-    heart.textContent = ["❤️", "💕", "💖", "💗", "✨"][Math.floor(Math.random() * 5)];
+
+    heart.textContent = [
+        "❤️", "💕", "💖", "💗", "✨"
+    ][Math.floor(Math.random() * 5)];
+
     heart.style.left = Math.random() * 100 + "vw";
-    heart.style.fontSize = (15 + Math.random() * 23) + "px";
-    heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+
+    heart.style.fontSize =
+        (15 + Math.random() * 23) + "px";
+
+    heart.style.animationDuration =
+        (4 + Math.random() * 4) + "s";
 
     document.body.appendChild(heart);
+
     setTimeout(() => heart.remove(), 8500);
 }
 
@@ -712,54 +903,59 @@ setInterval(showHearts, 700);
 
 function fireworks(container, count = 18) {
     for (let i = 0; i < count; i++) {
+
         const fw = document.createElement("div");
+
         fw.className = "firework";
-        fw.textContent = ["✨", "🎆", "💥", "⭐", "🌟"][Math.floor(Math.random() * 5)];
+
+        fw.textContent = [
+            "✨", "🎆", "💥", "⭐", "🌟"
+        ][Math.floor(Math.random() * 5)];
+
         fw.style.left = Math.random() * 90 + "%";
         fw.style.top = Math.random() * 80 + "%";
+
         container.appendChild(fw);
+
         setTimeout(() => fw.remove(), 1200);
     }
 }
 
-/* ---------------------------
-   PAGE 1: DOUBLE TAP
---------------------------- */
+/* PAGE 1: DOUBLE TAP */
 
 const openingText = document.getElementById("openingText");
+
 let lastOpeningTap = 0;
 let openingStarted = false;
 
-function openingTap() {
+openingText.addEventListener("click", function() {
+
     const now = Date.now();
 
     if (now - lastOpeningTap < 650 && !openingStarted) {
+
         openingStarted = true;
+
         tryStartBackgroundMusic();
+
         goToPage(2);
     }
 
     lastOpeningTap = now;
-}
+});
 
-openingText.addEventListener("click", openingTap);
-
-openingText.addEventListener("touchend", function(event) {
-    event.preventDefault();
-    openingTap();
-}, { passive: false });
-
-/* ---------------------------
-   PAGE 2: MAIN PIN
---------------------------- */
+/* PAGE 2: MAIN PIN */
 
 const mainPin = document.getElementById("mainPin");
 const mainPinBox = document.getElementById("mainPinBox");
 const pinMessage = document.getElementById("pinMessage");
 
 function checkMainPin() {
+
     if (mainPin.value === "1008") {
+
         mainPinBox.classList.add("hidden");
+
         pinMessage.textContent = "❤️";
         pinMessage.className = "beat-heart";
 
@@ -767,8 +963,11 @@ function checkMainPin() {
             pinMessage.className = "";
             goToPage(3);
         }, 1400);
+
     } else {
+
         mainPin.value = "";
+
         pinMessage.textContent = "💔";
         pinMessage.className = "broken-heart";
 
@@ -787,18 +986,22 @@ mainPin.addEventListener("keydown", event => {
     if (event.key === "Enter") checkMainPin();
 });
 
-/* ---------------------------
-   PAGE 3: CAKE CELEBRATION
---------------------------- */
+/* PAGE 3: CAKE */
 
 const cake = document.getElementById("birthdayCake");
-const celebrationFrame = document.getElementById("celebrationFrame");
-const birthdayBalloonText = document.getElementById("birthdayBalloonText");
+
+const celebrationFrame =
+    document.getElementById("celebrationFrame");
+
+const birthdayBalloonText =
+    document.getElementById("birthdayBalloonText");
 
 let cakeCut = false;
 
 cake.addEventListener("click", function() {
+
     if (cakeCut) return;
+
     cakeCut = true;
 
     cake.style.transform = "rotate(-8deg) scale(.85)";
@@ -808,24 +1011,35 @@ cake.addEventListener("click", function() {
         flame.style.opacity = "0";
     });
 
-    // Confetti blasts from both sides.
-    for (let side of ["left", "right"]) {
+    for (const side of ["left", "right"]) {
+
         for (let i = 0; i < 45; i++) {
+
             const bit = document.createElement("div");
+
             bit.className = "confetti";
+
             bit.style.background = [
-                "#ff5b9b", "#ffd76a", "#7ce7ff",
-                "#b6ff8c", "#d9a3ff", "#ffffff"
+                "#ff5b9b",
+                "#ffd76a",
+                "#7ce7ff",
+                "#b6ff8c",
+                "#d9a3ff",
+                "#ffffff"
             ][Math.floor(Math.random() * 6)];
 
             bit.style.left = side === "left"
                 ? Math.random() * 25 + "%"
                 : 75 + Math.random() * 20 + "%";
 
-            bit.style.top = (5 + Math.random() * 20) + "%";
-            bit.style.animationDelay = Math.random() * .6 + "s";
+            bit.style.top =
+                (5 + Math.random() * 20) + "%";
+
+            bit.style.animationDelay =
+                Math.random() * .6 + "s";
 
             celebrationFrame.appendChild(bit);
+
             setTimeout(() => bit.remove(), 3500);
         }
     }
@@ -833,60 +1047,76 @@ cake.addEventListener("click", function() {
     birthdayBalloonText.classList.add("show");
 
     let bursts = 0;
+
     const fwTimer = setInterval(() => {
+
         fireworks(celebrationFrame, 8);
+
         bursts++;
 
         if (bursts >= 5) clearInterval(fwTimer);
+
     }, 500);
 
     cakeTimer = setTimeout(() => {
         goToPage(4);
     }, 5200);
+
 });
 
-/* ---------------------------
-   PAGE 4: ROYAL LOVE FAN CARDS
---------------------------- */
+/* PAGE 4: ROYAL LOVE */
 
 const fanStage = document.getElementById("fanStage");
-const royalMessage = document.getElementById("royalMessage");
-const royalStart = document.getElementById("royalStart");
+
+const royalMessage =
+    document.getElementById("royalMessage");
+
+const royalStart =
+    document.getElementById("royalStart");
 
 const royalCards = [];
-let royalStarted = false;
 
 function createRoyalCards() {
+
     fanStage.innerHTML = "";
     royalCards.length = 0;
 
     for (let i = 0; i < 18; i++) {
+
         const card = document.createElement("div");
+
         card.className = "royal-card";
 
         const back = document.createElement("div");
+
         back.className = "card-back";
         back.textContent = "KING 👑";
 
         const img = document.createElement("img");
+
         img.src = "photo" + (i + 1) + ".jpg";
         img.alt = "Royal memory " + (i + 1);
 
         card.appendChild(back);
         card.appendChild(img);
+
         fanStage.appendChild(card);
 
         const angle = (i - 8.5) * 5.3;
         const spread = (i - 8.5) * 12;
 
         card.style.transform = `rotate(${angle}deg)`;
+
         card.style.left = `calc(50% + ${spread}px)`;
+
         card.style.zIndex = String(i + 1);
 
         card.addEventListener("click", function() {
+
             if (i === 0 && !royalStarted) {
                 startRoyalSequence();
             }
+
         });
 
         royalCards.push(card);
@@ -896,17 +1126,23 @@ function createRoyalCards() {
 createRoyalCards();
 
 function startRoyalSequence() {
+
     if (royalStarted) return;
 
     royalStarted = true;
+
     royalStart.classList.add("hidden");
+
     royalMessage.textContent = "Our golden moments ❤️";
 
     let index = 0;
 
     function showNextCard() {
+
         if (index >= royalCards.length) {
-            royalMessage.textContent = "Royal Love Forever ♾️❤️";
+
+            royalMessage.textContent =
+                "Royal Love Forever ♾️❤️";
 
             setTimeout(() => {
                 goToPage(5);
@@ -916,23 +1152,35 @@ function startRoyalSequence() {
         }
 
         const card = royalCards[index];
+
         const img = card.querySelector("img");
 
-        // Make each photo fit without overlapping another photo.
         card.style.zIndex = "100";
+
         card.classList.add("revealing");
-        royalMessage.textContent = "Memory " + (index + 1) + " ❤️";
+
+        royalMessage.textContent =
+            "Memory " + (index + 1) + " ❤️";
 
         img.onerror = function() {
-            img.alt = "Please check photo" + (index + 1) + ".jpg";
+            img.alt = "Check photo" + (index + 1) + ".jpg";
         };
 
+        /*
+         * The card becomes a fixed full-screen frame.
+         * The full photo fits inside the screen.
+         */
+
         setTimeout(() => {
+
             card.classList.remove("revealing");
+
             card.style.zIndex = String(index + 1);
+
             index++;
 
             setTimeout(showNextCard, 250);
+
         }, 2000);
     }
 
@@ -941,173 +1189,237 @@ function startRoyalSequence() {
 
 royalStart.addEventListener("click", startRoyalSequence);
 
-/* ---------------------------
-   PAGE 5: GREETING CARD + LETTER
---------------------------- */
+/* PAGE 5: NEW SHORT BIRTHDAY LETTER */
 
 const letterCode = document.getElementById("letterCode");
-const letterCover = document.getElementById("letterCover");
-const letterInner = document.getElementById("letterInner");
-const wrongCodeEmoji = document.getElementById("wrongCodeEmoji");
-const letterText = document.getElementById("letterText");
+
+const letterCover =
+    document.getElementById("letterCover");
+
+const letterInner =
+    document.getElementById("letterInner");
+
+const wrongCodeEmoji =
+    document.getElementById("wrongCodeEmoji");
+
+const letterText =
+    document.getElementById("letterText");
 
 const birthdayLetter =
-`My Dear Chlm ❤️,
+`No matter how far we are, you'll always have a special place in my heart. ❤️
 
-Happy Birthday to one of the most special people in my life. 🥹❤️
+Distance may keep us apart, but it can never change the bond we share. 🫂💕
 
-You understand my feelings even when I don't say anything. You stand up for me, support me, and never give up on me. That means more to me than I can explain.
+You are one of my most precious memories and a beautiful part of my life. I wish you endless happiness, love, and smiles. 🌹✨
 
-From our college days to working together, from our little fights to our video calls, every memory has a special place in my heart.
+Stay happy always, Chlm. No matter the distance, you'll always be special to me. ❤️🥹🫂
 
-I still cherish the little things — the food you made, our favourite moments, the laughter, and all those times when distance couldn't change our bond.
-
-Travelling from Chennai to Kumbakonam just to see you, and the time we spent together, will always remain precious memories to me. 🫂❤️
-
-No matter where life takes us, I always wish for your happiness. Keep smiling, keep shining, and never forget how special you are.
-
-Thank you for understanding me, standing by me, and being part of my life.
-
-Happy Birthday, Chlm! ❤️🥹
-
-With lots of love,
-Forever your special person ❤️`;
+Happy Birthday, Da! 💋🎂💕`;
 
 let letterOpened = false;
 
 document.getElementById("letterUnlock")
     .addEventListener("click", function() {
+
         if (letterOpened) return;
 
-        if (letterCode.value.trim().toLowerCase() === "love you too") {
+        if (
+            letterCode.value.trim().toLowerCase()
+            === "love you too"
+        ) {
+
             letterOpened = true;
+
             letterCover.classList.add("hidden");
+
             letterInner.classList.remove("hidden");
 
             letterText.textContent = "";
+
             let i = 0;
 
             clearInterval(letterTimer);
+
             letterTimer = setInterval(() => {
-                letterText.textContent = birthdayLetter.slice(0, i);
+
+                letterText.textContent =
+                    birthdayLetter.slice(0, i);
+
                 i += 3;
 
                 if (i > birthdayLetter.length) {
+
                     letterText.textContent = birthdayLetter;
+
                     clearInterval(letterTimer);
                 }
+
             }, 45);
+
         } else {
+
             letterCode.value = "";
+
             wrongCodeEmoji.classList.remove("hidden");
+
             wrongCodeEmoji.classList.remove("angry-zoom");
 
-            // Restart the animation.
             void wrongCodeEmoji.offsetWidth;
+
             wrongCodeEmoji.classList.add("angry-zoom");
 
             setTimeout(() => {
+
                 wrongCodeEmoji.classList.add("hidden");
+
                 wrongCodeEmoji.classList.remove("angry-zoom");
+
             }, 850);
         }
+
     });
 
 letterCode.addEventListener("keydown", event => {
+
     if (event.key === "Enter") {
         document.getElementById("letterUnlock").click();
     }
+
 });
 
-document.getElementById("letterContinue").addEventListener("click", function() {
-    goToPage(6);
-});
+document.getElementById("letterContinue")
+    .addEventListener("click", function() {
 
-/* ---------------------------
-   PAGE 6: GIFT + FAVOURITE SONG
---------------------------- */
+        goToPage(6);
+
+    });
+
+/* PAGE 6: GIFT + FAVOURITE SONG */
 
 const giftBox = document.getElementById("giftBox");
+
 const songCard = document.getElementById("songCard");
+
 let giftOpened = false;
 
 giftBox.addEventListener("click", function() {
+
     if (giftOpened) return;
+
     giftOpened = true;
 
     giftBox.classList.add("hidden");
+
     songCard.classList.remove("hidden");
 
-    // Pause background music while favourite song plays.
     bgMusic.pause();
 
     favoriteMusic.currentTime = 0;
     favoriteMusic.volume = 0.8;
 
-    const playPromise = favoriteMusic.play();
+    const result = favoriteMusic.play();
 
-    if (playPromise && typeof playPromise.catch === "function") {
-        playPromise.catch(() => {
-            // The Continue button can still be used if autoplay is blocked.
-        });
+    if (result && result.catch) {
+        result.catch(() => {});
     }
+
 });
 
 favoriteMusic.addEventListener("ended", function() {
     tryStartBackgroundMusic();
 });
 
-document.getElementById("songContinue").addEventListener("click", function() {
-    favoriteMusic.pause();
-    favoriteMusic.currentTime = 0;
-    tryStartBackgroundMusic();
-    goToPage(7);
-});
+document.getElementById("songContinue")
+    .addEventListener("click", function() {
 
-/* ---------------------------
-   PAGE 7: SECRET PIN
---------------------------- */
+        favoriteMusic.pause();
+
+        favoriteMusic.currentTime = 0;
+
+        tryStartBackgroundMusic();
+
+        goToPage(7);
+
+    });
+
+/* PAGE 7: SECRET PIN */
 
 const secretPin = document.getElementById("secretPin");
-const secretPinBox = document.getElementById("secretPinBox");
-const secretPinMessage = document.getElementById("secretPinMessage");
-const scratchArea = document.getElementById("scratchArea");
+
+const secretPinBox =
+    document.getElementById("secretPinBox");
+
+const secretPinMessage =
+    document.getElementById("secretPinMessage");
+
+const scratchArea =
+    document.getElementById("scratchArea");
 
 document.getElementById("secretPinButton")
     .addEventListener("click", function() {
+
         if (secretPin.value === "2731") {
+
             secretPinBox.classList.add("hidden");
+
             scratchArea.classList.remove("hidden");
+
             scratchNumber = 1;
+
             setupScratchCard();
+
         } else {
+
             secretPin.value = "";
-            secretPinMessage.textContent = "Wrong PIN 💔 Try again";
+
+            secretPinMessage.textContent =
+                "Wrong PIN 💔 Try again";
         }
+
     });
 
 secretPin.addEventListener("keydown", event => {
+
     if (event.key === "Enter") {
         document.getElementById("secretPinButton").click();
     }
+
 });
 
-/* ---------------------------
-   SCRATCH CARD SYSTEM
---------------------------- */
+/* SCRATCH CARD SYSTEM */
 
-const scratchCanvas = document.getElementById("scratchCanvas");
-const scratchWrap = document.getElementById("scratchWrap");
-const scratchPhoto = document.getElementById("scratchPhoto");
-const scratchTitle = document.getElementById("scratchTitle");
-const scratchStatus = document.getElementById("scratchStatus");
-const scratchCtx = scratchCanvas.getContext("2d");
+const scratchCanvas =
+    document.getElementById("scratchCanvas");
+
+const scratchWrap =
+    document.getElementById("scratchWrap");
+
+const scratchPhoto =
+    document.getElementById("scratchPhoto");
+
+const scratchTitle =
+    document.getElementById("scratchTitle");
+
+const scratchStatus =
+    document.getElementById("scratchStatus");
+
+const scratchCtx =
+    scratchCanvas.getContext("2d");
+
+let scratchNumber = 1;
+let scratchCompleted = false;
+let scratchReady = false;
+let scratchRevealing = false;
+let lastScratchPoint = null;
 
 function sizeScratchCanvas() {
+
     const rect = scratchWrap.getBoundingClientRect();
+
     const dpr = window.devicePixelRatio || 1;
 
     scratchCanvas.width = Math.round(rect.width * dpr);
+
     scratchCanvas.height = Math.round(rect.height * dpr);
 
     scratchCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -1116,9 +1428,11 @@ function sizeScratchCanvas() {
 }
 
 function drawScratchCover() {
+
     const rect = scratchWrap.getBoundingClientRect();
 
     scratchCtx.globalCompositeOperation = "source-over";
+
     scratchCtx.clearRect(0, 0, rect.width, rect.height);
 
     const gradient = scratchCtx.createLinearGradient(
@@ -1130,21 +1444,28 @@ function drawScratchCover() {
     gradient.addColorStop(1, "#4e1d53");
 
     scratchCtx.fillStyle = gradient;
+
     scratchCtx.fillRect(0, 0, rect.width, rect.height);
 
-    // Decorative scratch-card stars.
     scratchCtx.fillStyle = "#fff4c8";
+
     scratchCtx.font = "22px Georgia";
+
     scratchCtx.textAlign = "center";
 
     for (let i = 0; i < 12; i++) {
+
         const x = 20 + Math.random() * (rect.width - 40);
+
         const y = 25 + Math.random() * (rect.height - 50);
+
         scratchCtx.fillText("✦", x, y);
     }
 
     scratchCtx.fillStyle = "#ffffff";
+
     scratchCtx.font = "bold 22px Georgia";
+
     scratchCtx.fillText(
         "SCRATCH HERE ❤️",
         rect.width / 2,
@@ -1152,6 +1473,7 @@ function drawScratchCover() {
     );
 
     scratchCtx.font = "16px Georgia";
+
     scratchCtx.fillText(
         "Reveal Your Secret",
         rect.width / 2,
@@ -1162,6 +1484,7 @@ function drawScratchCover() {
 }
 
 function setupScratchCard() {
+
     scratchCompleted = false;
     scratchReady = false;
     scratchRevealing = false;
@@ -1175,16 +1498,20 @@ function setupScratchCard() {
         ? "secret1.jpg"
         : "secret2.jpg";
 
-    scratchStatus.textContent = "Scratch with your finger to reveal 💕";
+    scratchStatus.textContent =
+        "Scratch with your finger to reveal 💕";
 
-    // Wait for the page layout before sizing the canvas.
     requestAnimationFrame(() => {
+
         sizeScratchCanvas();
+
         scratchReady = true;
+
     });
 }
 
 function getScratchPosition(event) {
+
     const rect = scratchCanvas.getBoundingClientRect();
 
     return {
@@ -1194,21 +1521,38 @@ function getScratchPosition(event) {
 }
 
 function scratchAt(x, y) {
-    if (!scratchReady || scratchCompleted || scratchRevealing) return;
+
+    if (
+        !scratchReady ||
+        scratchCompleted ||
+        scratchRevealing
+    ) return;
 
     scratchCtx.globalCompositeOperation = "destination-out";
+
     scratchCtx.lineWidth = 38;
     scratchCtx.lineCap = "round";
     scratchCtx.lineJoin = "round";
 
     if (lastScratchPoint) {
+
         scratchCtx.beginPath();
-        scratchCtx.moveTo(lastScratchPoint.x, lastScratchPoint.y);
+
+        scratchCtx.moveTo(
+            lastScratchPoint.x,
+            lastScratchPoint.y
+        );
+
         scratchCtx.lineTo(x, y);
+
         scratchCtx.stroke();
+
     } else {
+
         scratchCtx.beginPath();
+
         scratchCtx.arc(x, y, 19, 0, Math.PI * 2);
+
         scratchCtx.fill();
     }
 
@@ -1218,22 +1562,26 @@ function scratchAt(x, y) {
 }
 
 function checkScratchProgress() {
-    const rect = scratchWrap.getBoundingClientRect();
+
     const pixels = scratchCtx.getImageData(
-        0, 0, scratchCanvas.width, scratchCanvas.height
+        0,
+        0,
+        scratchCanvas.width,
+        scratchCanvas.height
     ).data;
 
     let transparent = 0;
-    const total = pixels.length / 4;
 
-    // Sample pixels to keep this check efficient on mobile.
-    const step = 4 * 12;
+    let sampled = 0;
 
-    for (let i = 3; i < pixels.length; i += step) {
+    for (let i = 3; i < pixels.length; i += 48) {
+
+        sampled++;
+
         if (pixels[i] < 80) transparent++;
     }
 
-    const ratio = transparent / (total / 12);
+    const ratio = sampled ? transparent / sampled : 0;
 
     if (ratio > 0.38) {
         revealScratchPhoto();
@@ -1241,9 +1589,11 @@ function checkScratchProgress() {
 }
 
 scratchCanvas.addEventListener("pointerdown", function(event) {
+
     if (!scratchReady || scratchCompleted) return;
 
     event.preventDefault();
+
     lastScratchPoint = null;
 
     try {
@@ -1251,15 +1601,25 @@ scratchCanvas.addEventListener("pointerdown", function(event) {
     } catch (error) {}
 
     const pos = getScratchPosition(event);
+
     scratchAt(pos.x, pos.y);
+
 });
 
 scratchCanvas.addEventListener("pointermove", function(event) {
-    if (!scratchReady || scratchCompleted || event.buttons === 0) return;
+
+    if (
+        !scratchReady ||
+        scratchCompleted ||
+        event.buttons === 0
+    ) return;
 
     event.preventDefault();
+
     const pos = getScratchPosition(event);
+
     scratchAt(pos.x, pos.y);
+
 });
 
 scratchCanvas.addEventListener("pointerup", function() {
@@ -1271,111 +1631,168 @@ scratchCanvas.addEventListener("pointercancel", function() {
 });
 
 function revealScratchPhoto() {
+
     if (scratchCompleted || scratchRevealing) return;
 
     scratchRevealing = true;
     scratchCompleted = true;
     scratchReady = false;
 
-    // Remove the cover so the image is revealed.
     scratchCanvas.style.transition = "opacity .5s ease";
+
     scratchCanvas.style.opacity = "0";
 
-    scratchStatus.textContent = "A special memory just for you ❤️";
+    scratchStatus.textContent =
+        "A special memory just for you ❤️";
 
     setTimeout(() => {
+
         scratchCanvas.classList.add("hidden");
+
     }, 550);
 
     setTimeout(() => {
+
         if (scratchNumber === 1) {
+
             scratchNumber = 2;
+
             scratchCanvas.classList.remove("hidden");
+
             scratchCanvas.style.opacity = "1";
+
             setupScratchCard();
+
         } else {
+
             goToPage(8);
+
         }
+
     }, 3000);
 }
 
-/* ---------------------------
-   PAGE 8: REPLAY
---------------------------- */
+/* PAGE 8: REPLAY */
 
-document.getElementById("replayButton").addEventListener("click", function() {
-    // Stop timers and audio before restarting.
-    clearTimeout(cakeTimer);
-    clearInterval(letterTimer);
+document.getElementById("replayButton")
+    .addEventListener("click", function() {
 
-    favoriteMusic.pause();
-    favoriteMusic.currentTime = 0;
+        clearTimeout(cakeTimer);
 
-    bgMusic.currentTime = 0;
-    tryStartBackgroundMusic();
+        clearInterval(letterTimer);
 
-    cakeCut = false;
-    cake.style.transform = "";
-    document.querySelectorAll(".flame").forEach(flame => {
-        flame.style.opacity = "1";
+        favoriteMusic.pause();
+
+        favoriteMusic.currentTime = 0;
+
+        bgMusic.currentTime = 0;
+
+        tryStartBackgroundMusic();
+
+        cakeCut = false;
+
+        cake.style.transform = "";
+
+        document.querySelectorAll(".flame").forEach(flame => {
+            flame.style.opacity = "1";
+        });
+
+        birthdayBalloonText.classList.remove("show");
+
+        document.querySelectorAll(".confetti").forEach(item => {
+            item.remove();
+        });
+
+        document.querySelectorAll(".firework").forEach(item => {
+            item.remove();
+        });
+
+        royalStarted = false;
+
+        royalStart.classList.remove("hidden");
+
+        royalMessage.textContent =
+            "Touch the first King card 👑";
+
+        createRoyalCards();
+
+        letterOpened = false;
+
+        letterCode.value = "";
+
+        letterCover.classList.remove("hidden");
+
+        letterInner.classList.add("hidden");
+
+        wrongCodeEmoji.classList.add("hidden");
+
+        letterText.textContent = "";
+
+        giftOpened = false;
+
+        giftBox.classList.remove("hidden");
+
+        songCard.classList.add("hidden");
+
+        secretPin.value = "";
+
+        secretPinMessage.textContent = "";
+
+        secretPinBox.classList.remove("hidden");
+
+        scratchArea.classList.add("hidden");
+
+        scratchNumber = 1;
+
+        scratchCanvas.classList.remove("hidden");
+
+        scratchCanvas.style.opacity = "1";
+
+        mainPin.value = "";
+
+        mainPinBox.classList.remove("hidden");
+
+        pinMessage.textContent = "";
+
+        pinMessage.className = "";
+
+        openingStarted = false;
+
+        lastOpeningTap = 0;
+
+        goToPage(1);
+
     });
 
-    birthdayBalloonText.classList.remove("show");
+/* RESIZE SCRATCH CARD */
 
-    royalStarted = false;
-    royalStart.classList.remove("hidden");
-    royalMessage.textContent = "Touch the first King card 👑";
-    createRoyalCards();
-
-    letterOpened = false;
-    letterCode.value = "";
-    letterCover.classList.remove("hidden");
-    letterInner.classList.add("hidden");
-    wrongCodeEmoji.classList.add("hidden");
-    letterText.textContent = "";
-
-    giftOpened = false;
-    giftBox.classList.remove("hidden");
-    songCard.classList.add("hidden");
-
-    secretPin.value = "";
-    secretPinMessage.textContent = "";
-    secretPinBox.classList.remove("hidden");
-    scratchArea.classList.add("hidden");
-
-    scratchNumber = 1;
-    scratchCanvas.classList.remove("hidden");
-    scratchCanvas.style.opacity = "1";
-
-    mainPin.value = "";
-    mainPinBox.classList.remove("hidden");
-    pinMessage.textContent = "";
-    pinMessage.className = "";
-
-    openingStarted = false;
-    lastOpeningTap = 0;
-
-    goToPage(1);
-});
-
-/* Keep scratch canvas sized on rotation/resizing. */
 window.addEventListener("resize", function() {
-    if (currentPage === 7 &&
+
+    if (
+        currentPage === 7 &&
         !scratchArea.classList.contains("hidden") &&
-        !scratchCompleted) {
+        !scratchCompleted
+    ) {
         sizeScratchCanvas();
     }
+
 });
 
-/* Allow a direct interaction to start background music if autoplay was blocked. */
+/* START MUSIC AFTER FIRST INTERACTION IF NEEDED */
+
 document.addEventListener("pointerdown", function() {
-    if (currentPage > 1 &&
+
+    if (
+        currentPage > 1 &&
         bgMusic.paused &&
-        favoriteMusic.paused) {
+        favoriteMusic.paused
+    ) {
         tryStartBackgroundMusic();
     }
+
 }, { once: true });
 
 </script>
+
 </body>
 </html>
