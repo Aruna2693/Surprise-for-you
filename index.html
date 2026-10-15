@@ -2,1114 +2,792 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>For My Chlm ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Royal Birthday Surprise 👑❤️</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-
-:root{
-  --pink:#ff69b4;
-  --light:#ffd6e9;
-  --gold:#ffe4a3;
-  --purple:#3b1033;
+* {
+  box-sizing: border-box;
 }
 
-body{
-  font-family:Georgia,serif;
-  min-height:100vh;
-  overflow:hidden;
-  color:white;
-  background:#260c25;
+body {
+  margin: 0;
+  font-family: Georgia, serif;
+  background: linear-gradient(135deg, #170022, #510044, #170022);
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
 }
 
-button,input{font:inherit}
-button{border:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
-
-.page{
-  display:none;
-  position:fixed;
-  inset:0;
-  padding:16px;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  text-align:center;
-  overflow:hidden;
-  background:
-    linear-gradient(rgba(35,0,28,.68),rgba(35,0,28,.78)),
-    url("background.jpg") center/cover no-repeat;
+.page {
+  display: none;
+  min-height: 100vh;
+  padding: 25px 15px;
+  position: relative;
+  overflow: hidden;
 }
 
-.page.active{
-  display:flex;
-  animation:pageIn .6s ease;
+.page.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-@keyframes pageIn{
-  from{opacity:0;transform:translateY(20px)}
-  to{opacity:1;transform:translateY(0)}
+h1 {
+  color: #ffe49b;
+  text-shadow: 0 0 15px #ff4cba;
 }
 
-h1{
-  color:#ffe3ef;
-  text-shadow:0 0 18px #ff4f9a;
+button {
+  border: 0;
+  border-radius: 30px;
+  padding: 13px 24px;
+  background: linear-gradient(45deg, #ff168d, #ffc857);
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 10px;
+  box-shadow: 0 0 15px #ff4cba;
 }
 
-.glow{animation:glow 1.6s infinite alternate}
-
-@keyframes glow{
-  to{text-shadow:0 0 20px white,0 0 35px #ff1493}
+button:active {
+  transform: scale(.94);
 }
 
-.btn{
-  margin:10px;
-  padding:12px 22px;
-  border-radius:30px;
-  background:linear-gradient(135deg,#ffb6d5,#ff4f9a);
-  color:#4a123c;
-  font-weight:bold;
-  box-shadow:0 0 18px #ff69b4;
+input {
+  padding: 12px;
+  border-radius: 20px;
+  border: 2px solid pink;
+  text-align: center;
+  font-size: 18px;
+  width: 180px;
 }
 
-.floating{
-  position:fixed;
-  bottom:-40px;
-  z-index:900;
-  pointer-events:none;
-  animation:floatUp 6s linear forwards;
+.card {
+  width: min(330px, 88vw);
+  min-height: 250px;
+  padding: 18px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #5b164e, #210c36);
+  border: 2px solid gold;
+  box-shadow: 0 0 25px #ff56d6;
+  margin: 15px auto;
 }
 
-@keyframes floatUp{
-  to{transform:translateY(-115vh) rotate(360deg);opacity:0}
+.photo {
+  width: 100%;
+  height: 280px;
+  object-fit: contain;
+  background: #14051c;
+  border-radius: 14px;
+  border: 2px solid gold;
 }
 
-/* OPENING */
-
-#openingText{
-  font-size:clamp(25px,7vw,42px);
-  padding:20px;
-  color:#fff1f8;
-  text-shadow:0 0 20px #ff4f9a;
-  animation:glow 2s infinite alternate;
-  user-select:none;
+.small {
+  font-size: 14px;
+  color: #ffd6f1;
 }
 
-/* PIN */
-
-.pinBox{
-  width:min(320px,92vw);
-  padding:25px 20px;
-  border:1px solid #ffc7e1;
-  border-radius:25px;
-  background:rgba(65,0,45,.88);
-  box-shadow:0 0 30px #ff4f9a;
+#opening {
+  background-size: cover;
+  background-position: center;
 }
 
-.pinBox h2{margin-bottom:18px}
-
-.pinBox input{
-  width:100%;
-  padding:13px;
-  text-align:center;
-  letter-spacing:8px;
-  border-radius:15px;
-  border:2px solid pink;
-  background:white;
-  color:#4a123c;
-  font-size:22px;
+#opening::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(20, 0, 25, .62);
 }
 
-.pinMessage{
-  min-height:35px;
-  margin-top:10px;
-  font-size:28px;
+#opening > * {
+  position: relative;
 }
 
-#heartScene{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:2000;
-  align-items:center;
-  justify-content:center;
-  background:#260c25ee;
-  font-size:85px;
+#cake {
+  font-size: 120px;
+  cursor: pointer;
+  user-select: none;
+  filter: drop-shadow(0 0 20px pink);
+  transition: transform .6s;
 }
 
-#heartScene.show{display:flex;animation:heartBeat .8s infinite alternate}
-
-@keyframes heartBeat{to{transform:scale(1.2)}}
-
-#brokenScene{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:2000;
-  align-items:center;
-  justify-content:center;
-  background:#260c25dd;
-  font-size:80px;
+.cake-half {
+  animation: cakeCut 1.2s forwards;
 }
 
-#brokenScene.show{display:flex;animation:heartBeat .6s infinite alternate}
-
-/* BIRTHDAY CAKE */
-
-#birthdayTitle{
-  font-size:clamp(25px,7vw,43px);
-  color:#ffe4a3;
+@keyframes cakeCut {
+  0% { transform: translateX(0) rotate(0); opacity: 1; }
+  100% { transform: translateX(-180px) rotate(-30deg); opacity: 0; }
 }
 
-.cakeStage{
-  position:relative;
-  width:min(340px,90vw);
-  height:250px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin:20px 0;
+#balloonArea {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
 }
 
-#cake{
-  font-size:125px;
-  filter:drop-shadow(0 0 20px #ff8cbe);
-  animation:cakeGrow 1.5s ease both,cakeGlow 1.5s infinite alternate;
+.balloon {
+  position: absolute;
+  bottom: -130px;
+  font-size: 45px;
+  animation: floatUp 4s ease-in forwards;
 }
 
-@keyframes cakeGrow{
-  from{transform:scale(.1);opacity:0}
-  to{transform:scale(1);opacity:1}
+@keyframes floatUp {
+  to {
+    transform: translateY(-120vh) rotate(18deg);
+    opacity: 0;
+  }
 }
 
-@keyframes cakeGlow{
-  to{filter:drop-shadow(0 0 30px #ff4f9a)}
+.confetti {
+  position: fixed;
+  top: -20px;
+  z-index: 99;
+  pointer-events: none;
+  animation: confettiFall 2.8s linear forwards;
 }
 
-.cakePiece{
-  position:absolute;
-  display:none;
-  font-size:70px;
+@keyframes confettiFall {
+  to {
+    transform: translateY(110vh) rotate(900deg);
+    opacity: 0;
+  }
 }
 
-.cakePiece.left{left:10px}
-.cakePiece.right{right:10px}
-
-.cakeStage.cut #cake{opacity:0;transform:scale(.5)}
-.cakeStage.cut .cakePiece{display:block}
-
-.cakeStage.cut .left{animation:leftCake .8s forwards}
-.cakeStage.cut .right{animation:rightCake .8s forwards}
-
-@keyframes leftCake{
-  to{transform:translate(-35px,20px) rotate(-20deg);opacity:0}
+#photoStage {
+  perspective: 1000px;
+  width: min(330px, 88vw);
+  min-height: 370px;
+  position: relative;
+  margin: 15px auto;
 }
 
-@keyframes rightCake{
-  to{transform:translate(35px,20px) rotate(20deg);opacity:0}
+.rollingPhoto {
+  width: 100%;
+  height: 350px;
+  object-fit: contain;
+  background: #16041c;
+  border: 3px solid gold;
+  border-radius: 16px;
+  backface-visibility: hidden;
+  box-shadow: 0 0 25px #ff4cba;
 }
 
-/* BALLOONS AND BIRTHDAY MESSAGE */
-
-#birthdayEffects{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:800;
-  pointer-events:none;
-  overflow:hidden;
+.rollOut {
+  animation: rollAway 1s ease-in forwards;
 }
 
-.balloon{
-  position:absolute;
-  bottom:-100px;
-  font-size:42px;
-  animation:balloonUp 4s ease-out forwards;
+.rollIn {
+  animation: rollIn 1s ease-out forwards;
 }
 
-@keyframes balloonUp{
-  to{transform:translateY(-120vh) rotate(15deg)}
+@keyframes rollAway {
+  0% { transform: rotateY(0) rotateZ(0) scale(1); opacity: 1; }
+  50% { transform: rotateY(180deg) rotateZ(180deg) scale(.7); opacity: .7; }
+  100% { transform: rotateY(360deg) rotateZ(360deg) translateY(-160px) scale(.1); opacity: 0; }
 }
 
-#birthdayBanner{
-  position:absolute;
-  bottom:-100px;
-  left:50%;
-  width:100%;
-  transform:translateX(-50%);
-  font-size:clamp(26px,7vw,45px);
-  font-weight:bold;
-  color:#fff0a6;
-  text-shadow:0 0 15px #ff1493,0 0 30px #ff69b4;
-  opacity:0;
+@keyframes rollIn {
+  0% { transform: rotateY(-360deg) rotateZ(-180deg) translateY(-130px) scale(.1); opacity: 0; }
+  60% { transform: rotateY(-150deg) rotateZ(-40deg) scale(.8); opacity: .8; }
+  100% { transform: rotateY(0) rotateZ(0) translateY(0) scale(1); opacity: 1; }
 }
 
-#birthdayBanner.fly{animation:bannerUp 3s ease-out forwards}
-
-@keyframes bannerUp{
-  0%{bottom:-100px;opacity:0}
-  20%{opacity:1}
-  75%,100%{bottom:53%;opacity:1}
+.kingFan {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  max-width: 420px;
+  margin: 20px auto;
 }
 
-.firework{
-  position:fixed;
-  z-index:850;
-  pointer-events:none;
-  font-size:35px;
-  animation:fireworkPop 1.2s ease-out forwards;
+.kingCard {
+  width: 58px;
+  height: 85px;
+  background: linear-gradient(135deg, #fff0a6, #bb7400);
+  border: 2px solid white;
+  border-radius: 9px;
+  color: #4c003e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+  box-shadow: 0 0 12px gold;
+  animation: fanOpen .5s ease both;
 }
 
-@keyframes fireworkPop{
-  0%{transform:scale(.1);opacity:0}
-  30%{transform:scale(1.7);opacity:1}
-  100%{transform:scale(2.4) translateY(-20px);opacity:0}
+@keyframes fanOpen {
+  from { opacity: 0; transform: translateY(50px) rotate(-25deg) scale(.5); }
+  to { opacity: 1; transform: translateY(0) rotate(0) scale(1); }
 }
 
-/* ROYAL LOVE */
-
-#cardsPage{padding:8px}
-
-#cardsPage h1{font-size:32px}
-
-#fan{
-  position:relative;
-  width:min(350px,96vw);
-  height:min(390px,58vh);
-  perspective:1200px;
-  margin:8px auto;
+.letter {
+  width: min(550px, 92vw);
+  max-height: 65vh;
+  overflow-y: auto;
+  background: #fff1d2;
+  color: #641342;
+  border-radius: 12px;
+  padding: 25px;
+  line-height: 1.9;
+  box-shadow: 0 0 25px pink;
+  white-space: pre-line;
 }
 
-.fanCard{
-  position:absolute;
-  width:78px;
-  height:130px;
-  left:50%;
-  top:50%;
-  transform-origin:center 155px;
-  transition:all .7s ease;
-  cursor:pointer;
+.gift {
+  font-size: 120px;
+  cursor: pointer;
+  animation: giftBeat 1s infinite alternate;
 }
 
-.cardInner{
-  width:100%;
-  height:100%;
-  position:relative;
-  transform-style:preserve-3d;
-  transition:transform .7s;
+@keyframes giftBeat {
+  to { transform: scale(1.1) rotate(4deg); }
 }
 
-.fanCard.flipped .cardInner{transform:rotateY(180deg)}
-
-.cardFront,.cardBack{
-  position:absolute;
-  inset:0;
-  border-radius:12px;
-  border:2px solid #f4d08c;
-  backface-visibility:hidden;
-  -webkit-backface-visibility:hidden;
-  box-shadow:0 0 12px #ffb6d5;
+#scratchCanvas {
+  width: min(320px, 90vw);
+  height: 320px;
+  border-radius: 15px;
+  touch-action: none;
+  border: 3px solid gold;
+  box-shadow: 0 0 20px pink;
 }
 
-.cardFront{
-  background:linear-gradient(145deg,#fff3f8,#ffb6d5);
-  color:#8b174e;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  font-size:27px;
-  font-weight:bold;
+.hidden {
+  display: none !important;
 }
 
-.cardFront span{font-size:12px;margin-top:8px}
-
-.cardBack{
-  transform:rotateY(180deg);
-  background:#501038;
-}
-
-.cardBack img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  border-radius:10px;
-}
-
-#cardsProgress{font-size:13px;margin:5px}
-
-#royalForever{
-  display:none;
-  font-size:clamp(24px,6vw,38px);
-  color:#ffe4a3;
-  animation:glow 1.5s infinite alternate;
-}
-
-/* PHOTO OVERLAY */
-
-.photoOverlay{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:1200;
-  align-items:center;
-  justify-content:center;
-  background:rgba(15,0,15,.96);
-  padding:15px;
-}
-
-.photoOverlay img{
-  max-width:95%;
-  max-height:82vh;
-  object-fit:contain;
-  border:4px solid #ffd7a0;
-  border-radius:15px;
-  box-shadow:0 0 35px #ff69b4;
-}
-
-/* LETTER GATE */
-
-.letterCover{
-  width:min(350px,92vw);
-  height:min(510px,88vh);
-  position:relative;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  background:linear-gradient(145deg,#a92d60,#5b153e);
-  border:4px solid #f5d18b;
-  border-radius:15px;
-  box-shadow:0 0 30px #ff69b4;
-  overflow:hidden;
-}
-
-.coverTitle{
-  font-size:21px;
-  color:#ffe4a3;
-  margin-bottom:18px;
-}
-
-#lovePrompt{
-  font-size:28px;
-  color:#ffe4a3;
-  font-weight:bold;
-  padding:15px;
-  text-shadow:0 0 15px #ff69b4;
-}
-
-#loveInput{
-  width:85%;
-  padding:13px;
-  border:2px solid #ff80b5;
-  border-radius:15px;
-  color:#741c4b;
-  text-align:center;
-  background:#fff6fa;
-  font-size:18px;
-}
-
-#loveResult{min-height:40px;font-size:30px;margin-top:12px}
-
-.letterCard{
-  display:none;
-  position:absolute;
-  z-index:10;
-  width:92%;
-  height:94%;
-  padding:18px 14px;
-  border-radius:12px;
-  border:3px solid #e8bd71;
-  color:#76224f;
-  background:linear-gradient(135deg,#fffaf2,#ffe1ee);
-  box-shadow:0 0 25px white;
-  overflow-y:auto;
-  text-align:center;
-}
-
-.letterCard.open{
-  display:block;
-  animation:letterOut .8s ease;
-}
-
-@keyframes letterOut{
-  from{transform:translateY(100%) scale(.7);opacity:0}
-  to{transform:translateY(0) scale(1);opacity:1}
-}
-
-.letterCard h2{
-  font-family:cursive;
-  font-size:23px;
-  margin:12px 0;
-  color:#b21e65;
-}
-
-.letterText{
-  font-family:"Trebuchet MS",sans-serif;
-  font-size:15px;
-  line-height:1.7;
-  white-space:pre-line;
-  padding-bottom:15px;
-}
-
-/* GIFT */
-
-.giftBox{
-  font-size:115px;
-  cursor:pointer;
-  filter:drop-shadow(0 0 22px #ffb6d5);
-  animation:bounce 1.8s infinite;
-}
-
-@keyframes bounce{50%{transform:translateY(-10px)}}
-
-#musicArea{display:none;margin-top:15px}
-
-.musicNotes{
-  font-size:38px;
-  letter-spacing:8px;
-  animation:notes 1s infinite alternate;
-}
-
-@keyframes notes{to{transform:translateY(-8px) rotate(5deg)}}
-
-/* SECRET PHOTO */
-
-.secretBox{
-  width:min(340px,92vw);
-  padding:20px;
-  border:2px solid pink;
-  border-radius:22px;
-  background:rgba(60,0,40,.88);
-}
-
-.secretBox input{
-  width:100%;
-  padding:13px;
-  border-radius:12px;
-  border:2px solid pink;
-  text-align:center;
-  letter-spacing:7px;
-  margin-top:15px;
-  font-size:20px;
-}
-
-#secretPhoto{
-  display:none;
-  width:min(300px,85vw);
-  max-height:48vh;
-  object-fit:contain;
-  border:3px solid #ffd7a0;
-  border-radius:15px;
-  margin-top:12px;
-}
-
-#scratchCanvas{
-  display:none;
-  width:min(300px,85vw);
-  height:250px;
-  border-radius:15px;
-  touch-action:none;
-  margin-top:12px;
-}
-
-/* FINAL */
-
-.finalText{
-  width:min(540px,95%);
-  max-height:80vh;
-  overflow:auto;
-  font-size:clamp(17px,4.5vw,21px);
-  line-height:1.8;
-  white-space:pre-line;
-  color:#fff1f8;
-  text-shadow:0 0 10px #ff4f9a;
-}
-
-@media(max-height:700px){
-  #fan{height:320px}
-  .fanCard{width:65px;height:110px}
-  #cake{font-size:100px}
-  .letterCover{height:85vh}
+footer {
+  color: #ffcbe9;
+  font-size: 12px;
+  margin-top: 20px;
 }
 </style>
 </head>
 
 <body>
 
-<audio id="bgm" src="bgm.mp3" loop preload="auto"></audio>
-<audio id="favoriteSong" src="favorite.mp3" preload="auto"></audio>
+<!-- Upload your photos and music here -->
+<input type="file" id="bgUpload" accept="image/*" hidden>
+<input type="file" id="bgMusicUpload" accept="audio/*" hidden>
+<input type="file" id="photosUpload" accept="image/*" multiple hidden>
+<input type="file" id="favMusicUpload" accept="audio/*" hidden>
+<input type="file" id="secretUpload" accept="image/*" multiple hidden>
 
-<!-- OPENING -->
+<audio id="bgMusic" loop></audio>
+<audio id="favMusic"></audio>
+
+<!-- PAGE 1 -->
 <section class="page active" id="opening">
-  <div id="openingText">This is for you fraud 💕💞</div>
+  <h1>This Is For You 💕</h1>
+  <p>My Special Person ❤️</p>
+  <button onclick="document.getElementById('bgUpload').click()">
+    Choose Background Photo
+  </button>
+  <button onclick="document.getElementById('bgMusicUpload').click()">
+    Choose Background Music 🎵
+  </button>
+  <button onclick="startPin()">Open Your Surprise 💌</button>
 </section>
 
-<!-- MAIN PIN -->
+<!-- PAGE 2 -->
 <section class="page" id="pinPage">
-  <div class="pinBox">
-    <h2>🔐 Enter PIN ❤️</h2>
-    <form id="mainPinForm">
-      <input id="mainPin" type="password" inputmode="numeric"
-        maxlength="4" placeholder="••••" autocomplete="off">
-      <button class="btn" type="submit">Unlock ❤️</button>
-    </form>
-    <div id="pinMessage" class="pinMessage"></div>
-  </div>
+  <h1>🔐 A Little Secret</h1>
+  <p>Enter your special PIN ❤️</p>
+  <input type="password" id="pinInput" placeholder="Enter PIN"
+         inputmode="numeric" maxlength="4">
+  <br>
+  <button onclick="checkPin()">Unlock ❤️</button>
+  <p id="pinError"></p>
 </section>
 
-<div id="heartScene">💘🥰</div>
-<div id="brokenScene">💔</div>
+<!-- PAGE 3 -->
+<section class="page" id="cakePage">
+  <h1>A Cake Just For You 🎂</h1>
+  <p>Touch the cake to cut it!</p>
+  <div id="cake" onclick="cutCake()">🎂</div>
+  <p id="cakeMessage">Make a wish, birthday star! ✨</p>
+</section>
 
-<!-- BIRTHDAY -->
+<!-- PAGE 4 -->
 <section class="page" id="birthdayPage">
-  <h1 id="birthdayTitle">Happy Birthday Chlm ❤️</h1>
-  <div class="cakeStage" id="cakeStage">
-    <div id="cake">🎂</div>
-    <div class="cakePiece left">🍰</div>
-    <div class="cakePiece right">🍰</div>
-  </div>
+  <div id="balloonArea"></div>
+  <h1 id="birthdayTitle">HAPPY BIRTHDAY ❤️</h1>
+  <p>May your life always be filled with happiness!</p>
+  <button id="birthdayNext" class="hidden" onclick="showRoyal()">
+    Continue to Our Memories 👑
+  </button>
 </section>
 
-<div id="birthdayEffects">
-  <div id="birthdayBanner">🎈 Happy Birthday Chellam ❤️ 🎈</div>
-</div>
-
-<!-- ROYAL LOVE -->
-<section class="page" id="cardsPage">
-  <h1>Royal Love ❤️👑</h1>
-  <div id="fan"></div>
-  <div id="cardsProgress">18 King Cards 👑</div>
-  <div id="royalForever">
-    Royal Love Forever ♾️❤️
-    <br>
-    <button class="btn" id="toLetter">💌</button>
-  </div>
+<!-- PAGE 5 -->
+<section class="page" id="royalPage">
+  <h1>ROYAL LOVE 👑❤️</h1>
+  <p>18 Little Cards. Countless Memories.</p>
+  <div class="kingFan" id="kingFan"></div>
+  <button onclick="startPhotos()">Open Our Memories 📸</button>
 </section>
 
-<div class="photoOverlay" id="photoOverlay">
-  <img id="photoView" src="" alt="Memory">
-</div>
+<!-- PAGE 6 -->
+<section class="page" id="photosPage">
+  <h1>Our Special Memories ❤️</h1>
+  <p id="photoCount">Photo 1 / 18</p>
+  <div id="photoStage">
+    <img id="currentPhoto" class="rollingPhoto" alt="Our memory">
+  </div>
+  <button id="nextPhoto" onclick="nextMemory()">Touch to Flip ❤️</button>
+  <button id="photoUploadButton" onclick="document.getElementById('photosUpload').click()">
+    Choose 18 Photos 📸
+  </button>
+  <p class="small">Choose your photos before starting the memories.</p>
+</section>
 
-<!-- LETTER -->
+<!-- PAGE 7 -->
 <section class="page" id="letterPage">
-  <div class="letterCover">
-    <div class="coverTitle">💌 A Little Piece of My Heart 💌</div>
-    <div id="lovePrompt">Love You ❤️</div>
-    <input id="loveInput" type="text" placeholder="Love You Too 💕"
-      autocomplete="off" autocapitalize="off" spellcheck="false">
-    <div id="loveResult"></div>
+  <h1>A Letter For You 💌</h1>
+  <div class="letter" id="letterText">
+Happy Birthday, My Chlm ❤️
 
-    <div class="letterCard" id="letterCard">
-      <div>🌹 💖 🦋 ✨ 🌹</div>
-      <h2>Happy Birthday, My Chlm! ❤️🎂</h2>
-      <div class="letterText" id="letterText"></div>
-      <div>🌹 💕 🦋 💖 ✨ 🌹</div>
-      <button class="btn" id="toGift">🎁</button>
-    </div>
+You are a very special part of my life.
+Sometimes, you understand my feelings
+even before I explain them.
+
+Distance may keep us apart,
+but you are always close to my heart.
+
+I LOVE YOU ❤️
+I MISS YOU 🥹
+
+I am waiting for the day
+when I can see you again
+and make more beautiful memories with you.
+
+Always be happy, my dear.
+You deserve all the love and happiness in this world.
+
+Forever special to me. ❤️♾️
   </div>
+  <button onclick="showMusic()">Our Favourite Music 🎵</button>
 </section>
 
-<!-- GIFT -->
+<!-- PAGE 8 -->
+<section class="page" id="musicPage">
+  <h1>Our Favourite Song 🎶</h1>
+  <button onclick="document.getElementById('favMusicUpload').click()">
+    Choose Favourite Song
+  </button>
+  <br>
+  <button onclick="playFavourite()">▶ Play Favourite Song</button>
+  <button onclick="stopFavourite()">⏸ Stop Favourite Song</button>
+  <button onclick="showLove()">Continue ❤️</button>
+</section>
+
+<!-- PAGE 9 -->
+<section class="page" id="lovePage">
+  <h1>One Little Question ❤️</h1>
+  <p>Love You? 💕</p>
+  <button onclick="loveAnswer()">Love You Too 💖</button>
+  <p id="loveMessage"></p>
+  <button id="openGiftButton" class="hidden" onclick="openGift()">
+    Open Your Gift 🎁
+  </button>
+</section>
+
+<!-- PAGE 10 -->
 <section class="page" id="giftPage">
-  <h1 class="glow">A Special Gift for You ❤️</h1>
-  <div class="giftBox" id="giftBox">🎁</div>
-  <div id="musicArea">
-    <div class="musicNotes">🎵 🎶 🎵</div>
-    <p style="margin:15px">A song just for you ❤️</p>
-    <button class="btn" id="playFavorite">▶ Play Song 🎶</button>
-    <p id="songStatus" style="font-size:13px;margin-top:10px"></p>
-    <button class="btn" id="toSecret">❤️</button>
-  </div>
+  <h1>A Little Gift For You 🎁</h1>
+  <div class="gift" onclick="showSecret()">🎁</div>
+  <p>Touch the gift to open it!</p>
 </section>
 
-<!-- SECRET PIN -->
+<!-- PAGE 11 -->
 <section class="page" id="secretPage">
-  <div class="secretBox">
-    <h1>🔒 Our Little Secret ❤️</h1>
-    <form id="secretPinForm">
-      <input id="secretPin" type="password" inputmode="numeric"
-        maxlength="4" placeholder="••••" autocomplete="off">
-      <button class="btn" type="submit">💖</button>
-    </form>
-    <p id="secretMessage" style="font-size:14px;margin-top:10px"></p>
-    <img id="secretPhoto" src="" alt="Secret photo">
-    <canvas id="scratchCanvas"></canvas>
+  <h1>Our Secret Surprise 🤫❤️</h1>
+  <p>Scratch the card to reveal your secret photos!</p>
+  <div style="position:relative;width:min(320px,90vw);height:320px">
+    <div id="secretPhotos"
+         style="position:absolute;inset:0;display:flex;flex-direction:column;gap:5px">
+    </div>
+    <canvas id="scratchCanvas" width="320" height="320"
+            style="position:absolute;inset:0"></canvas>
   </div>
+  <p id="secretMessage"></p>
+  <button onclick="finishSurprise()">Finish ❤️</button>
 </section>
 
-<!-- FINAL -->
+<!-- PAGE 12 -->
 <section class="page" id="finalPage">
-  <div class="finalText">Thank You for Coming Into My Life, Chlm! ❤️🥹🫂
-
-You’re not just a part of my life; you’re one of the most beautiful things that ever happened to me. 🥹💗 No matter how far apart we are, you’ll always have a special place in my heart. ♾️❤️
-
-I’m so lucky to have you in my life. Keep smiling, stay happy, and always be the beautiful soul you are. 🦋💖
-
-Love You Forever, Chlm! 🫂❤️♾️
-
-🎂 Happy Birthday Da! ❤️🥹💋</div>
-  <button class="btn" id="replayButton">Replay ❤️</button>
+  <h1>Happy Birthday, My Chlm! 🎂❤️</h1>
+  <p>ROYAL LOVE FOREVER ♾️👑</p>
+  <div style="font-size:65px">❤️🎂🎈👑💖</div>
+  <p>More smiles, more memories, more beautiful days together.</p>
+  <button onclick="location.reload()">Watch Again 🔄</button>
 </section>
 
 <script>
 const $ = id => document.getElementById(id);
 
-const pageIds = [
-  "opening","pinPage","birthdayPage","cardsPage",
-  "letterPage","giftPage","secretPage","finalPage"
-];
-
-function showPage(id){
-  pageIds.forEach(p => $(p).classList.remove("active"));
-  $(id).classList.add("active");
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  $(id).classList.add('active');
+  window.scrollTo(0, 0);
 }
 
-function startBgm(){
-  const bgm = $("bgm");
-  bgm.volume = 0.35;
-  bgm.play().catch(() => {});
-}
+let photos = [];
+let photoIndex = 0;
+let photoBusy = false;
+let secretPhotos = [];
+let secretTimer = null;
+let secretOpened = false;
+let cakeCut = false;
+let birthdayTimer = null;
 
-function createFloat(){
-  const items = ["❤️","💕","💖","✨","🦋","🌹","💗"];
-  const el = document.createElement("div");
-  el.className = "floating";
-  el.textContent = items[Math.floor(Math.random()*items.length)];
-  el.style.left = Math.random()*100 + "vw";
-  el.style.fontSize = (15 + Math.random()*18) + "px";
-  el.style.animationDuration = (4 + Math.random()*3) + "s";
-  document.body.appendChild(el);
-  setTimeout(() => el.remove(),8000);
-}
-
-const floatTimer = setInterval(createFloat,850);
-
-/* DOUBLE TOUCH */
-
-function onDoubleTap(element,callback){
-  let lastTap = 0;
-  element.addEventListener("click",event => {
-    const now = Date.now();
-    if(now-lastTap < 450){
-      lastTap = 0;
-      callback(event);
-    }else{
-      lastTap = now;
-    }
-  });
-}
-
-onDoubleTap($("openingText"),() => {
-  startBgm();
-  showPage("pinPage");
+/* Background image */
+$('bgUpload').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  $('opening').style.backgroundImage =
+    `url("${URL.createObjectURL(file)}")`;
 });
 
-/* MAIN PIN */
+/* Background music */
+$('bgMusicUpload').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  $('bgMusic').src = URL.createObjectURL(file);
+  $('bgMusic').play().catch(() => {});
+});
 
-$("mainPinForm").addEventListener("submit",event => {
-  event.preventDefault();
+/* Favourite music */
+$('favMusicUpload').addEventListener('change', e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  $('favMusic').src = URL.createObjectURL(file);
+});
 
-  if($("mainPin").value === "1008"){
-    $("pinMessage").textContent = "";
-    $("heartScene").classList.add("show");
+$('favMusic').addEventListener('play', () => {
+  $('bgMusic').pause();
+});
 
-    setTimeout(() => {
-      $("heartScene").classList.remove("show");
-      $("mainPin").value = "";
-      showPage("birthdayPage");
-    },1100);
+$('favMusic').addEventListener('ended', () => {
+  $('bgMusic').play().catch(() => {});
+});
 
-  }else{
-    $("mainPin").value = "";
-    $("brokenScene").classList.add("show");
+$('favMusic').addEventListener('pause', () => {
+  if (!$('favMusic').ended) return;
+  $('bgMusic').play().catch(() => {});
+});
 
-    setTimeout(() => {
-      $("brokenScene").classList.remove("show");
-      $("pinMessage").textContent = "";
-    },1000);
+function startPin() {
+  showPage('pinPage');
+}
+
+function checkPin() {
+  if ($('pinInput').value === '2731') {
+    $('pinError').textContent = '';
+    $('bgMusic').play().catch(() => {});
+    showPage('cakePage');
+  } else {
+    $('pinError').textContent = 'Wrong PIN. Try again ❤️';
   }
-});
-
-/* CAKE CUT AND BIRTHDAY EFFECTS */
-
-let cakeStarted = false;
-
-$("cake").addEventListener("click",() => {
-  if(cakeStarted) return;
-  cakeStarted = true;
-
-  $("cakeStage").classList.add("cut");
-
-  setTimeout(() => {
-    showBirthdayEffects();
-  },900);
-});
-
-function showBirthdayEffects(){
-  $("birthdayEffects").style.display = "block";
-  $("birthdayBanner").classList.add("fly");
-
-  const balloonTypes = ["🎈","🎈","🎈","🎈","🎈","🎈"];
-
-  balloonTypes.forEach((b,i) => {
-    setTimeout(() => {
-      const el = document.createElement("div");
-      el.className = "balloon";
-      el.textContent = b;
-      el.style.left = (5 + Math.random()*90) + "%";
-      el.style.animationDuration = (3 + Math.random()*2) + "s";
-      $("birthdayEffects").appendChild(el);
-      setTimeout(() => el.remove(),6000);
-    },i*180);
-  });
-
-  setTimeout(() => {
-    for(let i=0;i<18;i++){
-      setTimeout(() => {
-        const f = document.createElement("div");
-        f.className = "firework";
-        f.textContent = ["🎆","✨","🎇","💖"][i%4];
-        f.style.left = (5 + Math.random()*85) + "vw";
-        f.style.top = (8 + Math.random()*65) + "vh";
-        document.body.appendChild(f);
-        setTimeout(() => f.remove(),1400);
-      },i*150);
-    }
-  },2200);
-
-  setTimeout(() => {
-    $("birthdayEffects").style.display = "none";
-    $("birthdayBanner").classList.remove("fly");
-    $("birthdayEffects").querySelectorAll(".balloon").forEach(el => el.remove());
-    showPage("cardsPage");
-    arrangeFan();
-  },6500);
 }
 
-/* 18 KING PHOTO CARDS */
+/* Cake cutting */
+function cutCake() {
+  if (cakeCut) return;
+  cakeCut = true;
 
-const fan = $("fan");
-const cardCount = 18;
-let cardOrder = [];
-let isAnimating = false;
-let cardsSeen = new Set();
-let photoTimer = null;
+  $('cakeMessage').textContent = 'Your wish is on its way! ✨';
 
-function createCards(){
-  fan.innerHTML = "";
-  cardOrder = [];
-  cardsSeen.clear();
+  const cake = $('cake');
+  cake.style.pointerEvents = 'none';
+  cake.classList.add('cake-half');
 
-  for(let i=1;i<=cardCount;i++){
-    cardOrder.push(i);
+  setTimeout(() => {
+    cake.textContent = '';
+    cake.style.display = 'none';
 
-    const card = document.createElement("div");
-    card.className = "fanCard";
-    card.dataset.id = i;
+    // Birthday celebration starts only after cake disappears.
+    showPage('birthdayPage');
+    birthdayCelebration();
+  }, 1250);
+}
 
-    const inner = document.createElement("div");
-    inner.className = "cardInner";
+/* Balloons + fireworks + confetti */
+function birthdayCelebration() {
+  const area = $('balloonArea');
+  area.innerHTML = '';
 
-    const front = document.createElement("div");
-    front.className = "cardFront";
-    front.innerHTML = "👑<span>KING</span>";
+  const balloonIcons = ['🎈','🎈','🎈','💖','🎈','🎈','🎈'];
 
-    const back = document.createElement("div");
-    back.className = "cardBack";
+  balloonIcons.forEach((icon, i) => {
+    const balloon = document.createElement('div');
+    balloon.className = 'balloon';
+    balloon.textContent = icon;
+    balloon.style.left = (5 + Math.random() * 85) + '%';
+    balloon.style.animationDelay = (i * .3) + 's';
+    area.appendChild(balloon);
+  });
 
-    const img = document.createElement("img");
-    img.src = `photo${i}.jpg`;
-    img.alt = `Memory ${i}`;
+  $('birthdayTitle').textContent = '🎈 HAPPY BIRTHDAY 🎈';
 
-    back.appendChild(img);
-    inner.append(front,back);
-    card.appendChild(inner);
-    card.addEventListener("click",() => selectCard(i));
+  // Several bursts of colourful paper.
+  confettiBurst(140);
+
+  setTimeout(() => confettiBurst(100), 900);
+  setTimeout(() => confettiBurst(100), 1800);
+
+  setTimeout(() => {
+    $('birthdayTitle').textContent = 'HAPPY BIRTHDAY CHELLAM ❤️🎂';
+    $('birthdayNext').classList.remove('hidden');
+  }, 3500);
+}
+
+function confettiBurst(count) {
+  const symbols = ['🎊','✨','💖','🎉','⭐','🩷','💛','💙'];
+
+  for (let i = 0; i < count; i++) {
+    const el = document.createElement('span');
+    el.className = 'confetti';
+    el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.fontSize = (12 + Math.random() * 18) + 'px';
+    el.style.animationDuration = (1.8 + Math.random() * 2) + 's';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 4200);
+  }
+}
+
+/* Royal cards */
+function showRoyal() {
+  showPage('royalPage');
+
+  const fan = $('kingFan');
+  fan.innerHTML = '';
+
+  for (let i = 0; i < 18; i++) {
+    const card = document.createElement('div');
+    card.className = 'kingCard';
+    card.textContent = '👑';
+    card.title = 'KING';
+    card.style.animationDelay = (i * .04) + 's';
     fan.appendChild(card);
   }
-
-  arrangeFan();
-  $("cardsProgress").textContent = "18 King Cards 👑";
-  $("royalForever").style.display = "none";
 }
 
-function arrangeFan(){
-  const cards = [...fan.children];
-  const total = cards.length;
+/* Load photos */
+$('photosUpload').addEventListener('change', e => {
+  photos = Array.from(e.target.files)
+    .filter(f => f.type.startsWith('image/'))
+    .slice(0, 18)
+    .map(f => URL.createObjectURL(f));
 
-  cards.forEach((card,pos) => {
-    const angle = (pos-(total-1)/2)*5.3;
-    card.style.zIndex = pos+1;
-    card.style.left = "50%";
-    card.style.top = "50%";
-    card.style.transform =
-      `translate(-50%,-50%) rotate(${angle}deg) translateY(-85px)`;
-  });
-}
-
-function selectCard(id){
-  if(isAnimating) return;
-
-  const card = fan.querySelector(`[data-id="${id}"]`);
-  if(!card) return;
-
-  isAnimating = true;
-  card.style.zIndex = "100";
-  card.style.transform =
-    "translate(-50%,-50%) rotate(0deg) translateY(-15px) scale(1.2)";
-
-  setTimeout(() => {
-    card.classList.add("flipped");
-
-    $("photoView").src = `photo${id}.jpg`;
-    $("photoOverlay").style.display = "flex";
-
-    photoTimer = setTimeout(() => {
-      $("photoOverlay").style.display = "none";
-      $("photoView").src = "";
-      card.classList.remove("flipped");
-
-      // Selected card moves to the back.
-      card.remove();
-      fan.appendChild(card);
-
-      cardsSeen.add(id);
-      cardOrder = [...fan.children].map(c => Number(c.dataset.id));
-
-      arrangeFan();
-
-      $("cardsProgress").textContent =
-        `${cardsSeen.size} / 18 Royal Love memories ❤️`;
-
-      if(cardsSeen.size === 18){
-        $("royalForever").style.display = "block";
-      }
-
-      isAnimating = false;
-    },2000);
-
-  },400);
-}
-
-createCards();
-
-$("toLetter").addEventListener("click",() => {
-  showPage("letterPage");
-  $("loveInput").value = "";
-  $("loveResult").textContent = "";
-  $("loveInput").disabled = false;
+  if (photos.length) {
+    $('photoUploadButton').textContent =
+      photos.length + ' Photos Ready ❤️';
+  }
 });
 
-/* LOVE YOU TOO GATE */
-
-let loveTimer = null;
-
-$("loveInput").addEventListener("input",() => {
-  clearTimeout(loveTimer);
-
-  const value = $("loveInput").value.trim().toLowerCase();
-
-  if(value === "love you too"){
-    $("loveResult").textContent = "💖";
-    $("loveInput").disabled = true;
-
-    setTimeout(() => {
-      $("letterCard").classList.add("open");
-      typeLetter();
-    },450);
-
+function startPhotos() {
+  if (!photos.length) {
+    $('photoUploadButton').click();
+    alert('Choose your photos first. Then press Open Our Memories.');
     return;
   }
 
-  if(value.length > 0){
-    loveTimer = setTimeout(() => {
-      if($("loveInput").value.trim().toLowerCase() !== "love you too"){
-        $("loveResult").textContent = "😒";
-        $("loveInput").value = "";
+  photoIndex = 0;
+  showPage('photosPage');
+  displayFirstPhoto();
+}
 
-        setTimeout(() => {
-          $("loveResult").textContent = "";
-        },850);
-      }
-    },1100);
-  }else{
-    $("loveResult").textContent = "";
-  }
-});
+function displayFirstPhoto() {
+  $('currentPhoto').src = photos[photoIndex];
+  $('photoCount').textContent =
+    `Photo ${photoIndex + 1} / ${photos.length}`;
 
-/* BIRTHDAY LETTER */
+  $('currentPhoto').classList.remove('rollOut', 'rollIn');
+  $('nextPhoto').textContent = 'Touch to Flip ❤️';
+}
 
-const letterContent = `Even though we're far apart, you’re always close to my heart. Sometimes, I wish I could be there with you, see your smile, hold your hand, and make your birthday extra special. 🫂💗
+function nextMemory() {
+  if (photoBusy) return;
 
-I LOVE YOU, CHLM! ❤️🫶🏻
-I MISS YOU MORE THAN WORDS CAN SAY! 🥺❤️‍🩹
-SENDING YOU THE BIGGEST HUG FROM FAR AWAY! 🫂💋
+  photoBusy = true;
+  const photo = $('currentPhoto');
+  photo.classList.remove('rollIn');
+  photo.classList.add('rollOut');
 
-I wish I could celebrate this beautiful day with you instead of just sending wishes through a screen. Distance makes me wish even more for the day we finally meet again. 🥹💕
+  // Old photo flips and rolls away before the next one appears.
+  setTimeout(() => {
+    photoIndex++;
 
-No matter how far we are, I hope you always remember how special you are to me. Keep smiling, stay happy, and never forget that someone is wishing for your happiness from afar. ❤️✨
-
-LOVE YOU SO MUCH, CHLM! ❤️🫂
-MISS YOU, AND I'M WAITING TO SEE YOU SOON! 🥹💗♾️
-
-Happy Birthday once again, my special person! 🎂💋❤️`;
-
-let letterTypingTimer = null;
-
-function typeLetter(){
-  clearInterval(letterTypingTimer);
-  $("letterText").textContent = "";
-  let i = 0;
-
-  letterTypingTimer = setInterval(() => {
-    if(i >= letterContent.length){
-      clearInterval(letterTypingTimer);
+    if (photoIndex >= photos.length) {
+      photoBusy = false;
+      showPage('letterPage');
       return;
     }
 
-    $("letterText").textContent += letterContent[i++];
-    $("letterCard").scrollTop = $("letterCard").scrollHeight;
-  },18);
+    photo.src = photos[photoIndex];
+    $('photoCount').textContent =
+      `Photo ${photoIndex + 1} / ${photos.length}`;
+
+    photo.classList.remove('rollOut');
+    photo.classList.add('rollIn');
+
+    setTimeout(() => {
+      photoBusy = false;
+    }, 1000);
+
+  }, 1000);
 }
 
-/* GIFT */
+/* Music page */
+function showMusic() {
+  showPage('musicPage');
+}
 
-$("toGift").addEventListener("click",() => {
-  clearInterval(letterTypingTimer);
-  showPage("giftPage");
-});
-
-$("giftBox").addEventListener("click",() => {
-  $("musicArea").style.display = "block";
-
-  for(let i=0;i<12;i++){
-    setTimeout(createFloat,i*100);
-  }
-});
-
-/* FAVORITE SONG */
-
-$("playFavorite").addEventListener("click",async() => {
-  const song = $("favoriteSong");
-  const bgm = $("bgm");
-
-  if(!song.paused){
-    song.pause();
-    $("playFavorite").textContent = "▶ Play Song 🎶";
-    $("songStatus").textContent = "Song paused ❤️";
-    bgm.play().catch(() => {});
+function playFavourite() {
+  if (!$('favMusic').src) {
+    $('favMusicUpload').click();
     return;
   }
 
-  bgm.pause();
+  $('bgMusic').pause();
+  $('favMusic').play().catch(() => {});
+}
 
-  try{
-    await song.play();
-    $("playFavorite").textContent = "⏸ Pause Song 🎶";
-    $("songStatus").textContent = "🎵 Playing for you ❤️";
-  }catch(error){
-    $("songStatus").textContent =
-      "favorite.mp3 file-ஐ சரிபார் ❤️";
-    bgm.play().catch(() => {});
-  }
+function stopFavourite() {
+  $('favMusic').pause();
+  $('favMusic').currentTime = 0;
+  $('bgMusic').play().catch(() => {});
+}
+
+function showLove() {
+  showPage('lovePage');
+}
+
+function loveAnswer() {
+  $('loveMessage').textContent = 'Love You Too 💕 Forever Special ❤️';
+  $('openGiftButton').classList.remove('hidden');
+}
+
+function openGift() {
+  showPage('giftPage');
+}
+
+/* Secret photos: two images, scratch to reveal, hide after 10 seconds */
+$('secretUpload').addEventListener('change', e => {
+  secretPhotos = Array.from(e.target.files)
+    .filter(f => f.type.startsWith('image/'))
+    .slice(0, 2)
+    .map(f => URL.createObjectURL(f));
 });
 
-$("favoriteSong").addEventListener("ended",() => {
-  $("playFavorite").textContent = "▶ Play Song 🎶";
-  $("songStatus").textContent = "💕 With love, Chlm!";
-  $("bgm").play().catch(() => {});
-});
-
-$("toSecret").addEventListener("click",() => {
-  $("favoriteSong").pause();
-  $("bgm").play().catch(() => {});
-  showPage("secretPage");
-});
-
-/* SECRET PIN AND TWO PHOTOS */
-
-let secretTimer1 = null;
-let secretTimer2 = null;
-
-$("secretPinForm").addEventListener("submit",event => {
-  event.preventDefault();
-
-  if($("secretPin").value !== "2731"){
-    $("secretMessage").textContent = "💔";
-    $("secretPin").value = "";
+function showSecret() {
+  if (secretOpened) {
+    $('secretMessage').textContent =
+      'Your secret surprise has already been revealed ❤️';
     return;
   }
 
-  $("secretPinForm").style.display = "none";
-  $("secretMessage").textContent = "❤️🥹❤️";
+  if (!secretPhotos.length) {
+    $('secretUpload').click();
+    $('secretMessage').textContent =
+      'Choose your two secret photos, then touch the gift again.';
+    return;
+  }
 
-  // First secret photo
-  $("secretPhoto").src = "secret1.jpg";
-  $("secretPhoto").style.display = "block";
+  secretOpened = true;
+  showPage('secretPage');
 
-  secretTimer1 = setTimeout(() => {
-    // Second secret photo
-    $("secretPhoto").src = "secret2.jpg";
+  const holder = $('secretPhotos');
+  holder.innerHTML = '';
 
-    secretTimer2 = setTimeout(() => {
-      $("secretPhoto").style.display = "none";
-      showPage("finalPage");
-    },7000);
+  secretPhotos.forEach(src => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.style.width = '100%';
+    img.style.height = '155px';
+    img.style.objectFit = 'contain';
+    holder.appendChild(img);
+  });
 
-  },5000);
-});
+  prepareScratch();
 
-/* REPLAY */
+  $('secretMessage').textContent =
+    'Scratch to reveal! The photos will hide after 10 seconds.';
 
-$("replayButton").addEventListener("click",() => {
-  clearInterval(letterTypingTimer);
-  clearInterval(floatTimer);
-  clearTimeout(photoTimer);
-  clearTimeout(secretTimer1);
-  clearTimeout(secretTimer2);
-  clearTimeout(loveTimer);
+  secretTimer = setTimeout(() => {
+    holder.innerHTML = '';
+    $('scratchCanvas').classList.add('hidden');
+    $('secretMessage').textContent =
+      'Secret photos hidden ❤️';
+  }, 10000);
+}
 
-  $("favoriteSong").pause();
-  $("favoriteSong").currentTime = 0;
+/* Scratch card */
+function prepareScratch() {
+  const canvas = $('scratchCanvas');
+  canvas.classList.remove('hidden');
 
-  $("bgm").pause();
-  $("bgm").currentTime = 0;
+  const ctx = canvas.getContext('2d');
+  ctx.globalCompositeOperation = 'source-over';
 
-  $("cakeStage").classList.remove("cut");
-  $("cake").style.opacity = "1";
-  $("cakeStarted");
+  ctx.fillStyle = '#d99bc8';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  $("birthdayEffects").style.display = "none";
-  $("birthdayBanner").classList.remove("fly");
+  ctx.fillStyle = '#54104a';
+  ctx.font = 'bold 23px Georgia';
+  ctx.textAlign = 'center';
+  ctx.fillText('OUR SECRET ❤️', 160, 140);
+  ctx.font = '18px Georgia';
+  ctx.fillText('Scratch Here ✨', 160, 180);
 
-  $("heartScene").classList.remove("show");
-  $("brokenScene").classList.remove("show");
+  ctx.globalCompositeOperation = 'destination-out';
 
-  $("mainPin").value = "";
-  $("secretPin").value = "";
+  let scratching = false;
 
-  $("pinMessage").textContent = "";
-  $("secretMessage").textContent = "";
+  function scratch(e) {
+    if (!scratching) return;
 
-  $("musicArea").style.display = "none";
-  $("playFavorite").textContent = "▶ Play Song 🎶";
-  $("songStatus").textContent = "";
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
 
-  $("letterText").textContent = "";
-  $("letterCard").classList.remove("open");
+    const point = e.touches ? e.touches[0] : e;
+    const x = (point.clientX - rect.left) * scaleX;
+    const y = (point.clientY - rect.top) * scaleY;
 
-  $("loveInput").value = "";
-  $("loveInput").disabled = false;
-  $("loveResult").textContent = "";
+    ctx.beginPath();
+    ctx.arc(x, y, 24, 0, Math.PI * 2);
+    ctx.fill();
+  }
 
-  $("secretPhoto").style.display = "none";
-  $("secretPinForm").style.display = "block";
+  canvas.onpointerdown = e => {
+    scratching = true;
+    canvas.setPointerCapture(e.pointerId);
+    scratch(e);
+  };
 
-  createCards();
-  cakeStarted = false;
+  canvas.onpointermove = scratch;
+  canvas.onpointerup = () => scratching = false;
+  canvas.onpointercancel = () => scratching = false;
+}
 
-  showPage("opening");
+function finishSurprise() {
+  clearTimeout(secretTimer);
+  showPage('finalPage');
+  confettiBurst(100);
+}
+
+/* Music continues after the favourite track ends */
+$('favMusic').addEventListener('ended', () => {
+  $('bgMusic').play().catch(() => {});
 });
 </script>
 
